@@ -1,5 +1,3 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
-import { LinksFunction } from "@remix-run/node";
 import {
     Links,
     Meta,
@@ -8,12 +6,7 @@ import {
     ScrollRestoration,
 } from "@remix-run/react";
 
-import stylesheet from "~/tailwind.css?url";
-
-export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: stylesheet },
-    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
+import "./tailwind.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -27,7 +20,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Meta />
                 <Links />
             </head>
-            <body>
+            <body className="bg-slate-500 font-bold text-xl text-white">
                 {children}
                 <ScrollRestoration />
                 <Scripts />

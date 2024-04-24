@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,30 +8,30 @@ datasource db {
 }
 
 model User {
-  id  String  @id @default(cuid())
-  name  String 
-  email String @unique
+  id       String    @id @default(cuid())
+  name     String
+  email    String    @unique
   password Password?
 }
 
 model Password {
-  hash String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  hash   String
   userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model PersonalData{
+model PersonalData {
   id String @id @default(cuid())
   name String
-  DNI Int
+  DNI String
   birth DateTime
   kids Int
   address String
-  tel Int
+  tel String
   obvs String
 }
 
-model WorkData{
+model WorkData {
   id String @id @default(cuid())
   ant String
   cond String

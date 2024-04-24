@@ -9,7 +9,7 @@ async function main() {
     const user = await prisma.user.create({
         data: {
             name: "Recursos Humanos",
-            email: "unonueve95@gmail.com",
+            email: "larenovacion@mail.com",
             password: {
                 create: {
                     hash: hashedPassword,
@@ -17,7 +17,34 @@ async function main() {
             },
         },
     });
-    console.log(user);
+
+    const personalData = await prisma.personalData.create({
+        data: {
+            name: "Ignacio Pantoja",
+            DNI: "44008496",
+            birth: new Date("2002-05-03"),
+            kids: 0,
+            address: "Barrio Facundo Quiroga",
+            tel: "3804123456",
+            obvs: "un capo",
+        },
+    });
+
+    const workData = await prisma.workData.create({
+        data: {
+            ant: "Marzo de 2024",
+            cond: "Beca",
+            studies: "Secundario Completo",
+            area: "Planificacion",
+            a_cargo: "Maximiliano Guia",
+            disp: "Lunes, Miercoles y Viernes de 8 a 12",
+        },
+    });
+
+    console.log(`Database has been seeded.`);
+    console.dir(user, { depth: null });
+    console.dir(personalData, { depth: null });
+    console.dir(workData, { depth: null });
 }
 
 main()
