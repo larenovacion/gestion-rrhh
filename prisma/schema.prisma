@@ -22,3 +22,24 @@ model Password {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
 }
+
+model PersonalData{
+  id String @id @default(cuid())
+  name String
+  DNI Int
+  birth DateTime
+  kids Int
+  address String
+  tel Int
+  obvs String
+}
+
+model WorkData{
+  id String @id @default(cuid())
+  ant String
+  cond String
+  studies String
+  area String
+  a_cargo String
+  disp String
+}
