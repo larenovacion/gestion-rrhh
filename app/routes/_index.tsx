@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@vercel/remix";
 import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {

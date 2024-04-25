@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { LoaderFunctionArgs, json } from "@vercel/remix";
 import { NavLink, useLoaderData } from "@remix-run/react";
 import { getNomina } from "~/models/nomina.server";
 

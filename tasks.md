@@ -3,6 +3,7 @@
 -   [x] Seedear db (db push)
 -   [x] Definir routing de app
 -   [ ] Crear formularios de registro (CREAR/EDITAR)
+-   [ ] Añadir acciones para manejar datos de formularios
 -   [ ] Implementar autenticación
 -   [ ] Crear ruta para eliminar datos
 -   [ ] Diseñar UI

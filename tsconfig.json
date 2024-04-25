@@ -16,7 +16,8 @@
     ],
     "types": [
       "@remix-run/node",
-      "vite/client"
+      "vite/client",
+      "@vercel/remix"
     ],
     "isolatedModules": true,
     "esModuleInterop": true,
