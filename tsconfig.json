@@ -1,5 +1,6 @@
 {
   "include": [
+    "remix.env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/.server/**/*.ts",
@@ -23,8 +24,8 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "noEmit": true,
     "paths": {
       "~/*": [
         "./app/*"

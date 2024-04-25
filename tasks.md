@@ -1,11 +1,12 @@
 -   [x] Definir modelos en schema.prisma
 -   [x] Actualizar seed.ts para que coincida con models
 -   [x] Seedear db (db push)
--   [ ] Definir routing de app
+-   [x] Definir routing de app
 -   [ ] Crear formularios de registro (CREAR/EDITAR)
+-   [ ] Implementar autenticación
 -   [ ] Crear ruta para eliminar datos
 -   [ ] Diseñar UI
--   [ ] Deploy a Cloudflare Pages
+-   [x] Deploy a Cloudflare Pages (Vercel por el momento)
 
 ### WORKFLOW DE PRISMA:
 
