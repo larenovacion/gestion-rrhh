@@ -2,12 +2,14 @@
 -   [x] Actualizar seed.ts para que coincida con models
 -   [x] Seedear db (db push)
 -   [x] Definir routing de app
+-   [x] Deploy a Cloudflare Pages (Vercel por el momento)
+-   [x] Cambiar db a Neon Postgres (Vercel no admite SQLite)
+-   [x] Modificar variables de entorno y redeployear
 -   [ ] Crear formularios de registro (CREAR/EDITAR)
 -   [ ] Añadir acciones para manejar datos de formularios
 -   [ ] Implementar autenticación
 -   [ ] Crear ruta para eliminar datos
 -   [ ] Diseñar UI
--   [x] Deploy a Cloudflare Pages (Vercel por el momento)
 
 ### WORKFLOW DE PRISMA:
 
