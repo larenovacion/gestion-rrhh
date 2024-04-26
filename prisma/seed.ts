@@ -37,24 +37,22 @@ async function main() {
             address: "Barrio Facundo Quiroga",
             tel: "3804123456",
             obvs: "un capo",
-        },
-    });
-
-    const workData = await prisma.workData.create({
-        data: {
-            ant: "Marzo de 2024",
-            cond: "Beca",
-            studies: "Secundario Completo",
-            area: "Planificacion",
-            a_cargo: "Maximiliano Guia",
-            disp: "Lunes, Miercoles y Viernes de 8 a 12",
+            workData: {
+                create: {
+                    ant: "Marzo de 2024",
+                    cond: "Beca",
+                    studies: "Secundario Completo",
+                    area: "Planificacion",
+                    a_cargo: "Maximiliano Guia",
+                    disp: "Lunes, Miercoles y Viernes de 8 a 12",
+                },
+            },
         },
     });
 
     console.log(`Database has been seeded.`);
     console.dir(user, { depth: null });
     console.dir(personalData, { depth: null });
-    console.dir(workData, { depth: null });
 }
 
 main()

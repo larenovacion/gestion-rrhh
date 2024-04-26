@@ -16,28 +16,30 @@ model User {
 }
 
 model Password {
-  hash   String
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hash      String
+  userId    String    @unique
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model PersonalData {
-  id String @id @default(cuid())
-  name String
-  DNI String
-  birth DateTime
-  kids Int
-  address String
-  tel String
-  obvs String
+  id 		String    @id @default(cuid())
+  name 		String
+  DNI 		String
+  birth 	DateTime
+  kids 		Int
+  address 	String
+  tel 		String
+  obvs 		String
+  workData WorkData?
 }
 
 model WorkData {
-  id String @id @default(cuid())
-  ant String
-  cond String
-  studies String
-  area String
-  a_cargo String
-  disp String
+  personalId String @unique
+  personalData PersonalData? @relation(fields: [personalId], references: [id])
+  ant 		String
+  cond 		String
+  studies 	String
+  area 		String
+  a_cargo 	String
+  disp 		String
 }
