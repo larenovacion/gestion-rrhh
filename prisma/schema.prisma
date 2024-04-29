@@ -40,6 +40,5 @@ model WorkData {
   cond 		String
   studies 	String
   area 		String
-  a_cargo 	String
   disp 		String
 }

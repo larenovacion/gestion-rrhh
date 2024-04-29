@@ -3,7 +3,7 @@ import { Form, NavLink } from "@remix-run/react";
 export default function NuevoEmpleadoPage() {
     return (
         <div className="h-full flex flex-col items-center justify-around">
-            <h2 className="text-2xl text-center text-slate-600 mb-5">Registro de empleados</h2>
+            <h2 className="text-2xl text-center text-slate-600 mb-5">Registro de Empleado</h2>
             <Form method="post" className="text-slate-600 flex items-start justify-around gap-32" >
                 <div style={{ display: "flex", flexDirection: 'column' }}>
                     <label htmlFor="name" autoFocus={true}>Nombre Completo</label>
@@ -34,11 +34,19 @@ export default function NuevoEmpleadoPage() {
                     <input type="text" name="ant" id="ant" />
 
                     <label htmlFor="est">Estudios</label>
-                    <input type="text" name="est" id="est" />
+                    <select name="est" id="est">
+                        <option value="Primario Completo">Primario Completo</option>
+                        <option value="Secundario Incompleto">Secundario Incompleto</option>
+                        <option value="Secundario Incompleto">Secundario Incompleto</option>
+                        <option value="Terciario Incompleto">Terciario Incompleto</option>
+                        <option value="Terciario Completo">Terciario Completo</option>
+                        <option value="Universitario Incompleto">Universitario Incompleto</option>
+                        <option value="Universitario Completo">Universitario Completo</option>
+                    </select>
 
                     <label htmlFor="cond">Condición</label>
                     <select name="cond" id="cond">
-                        <option value="Control">Contrato</option>
+                        <option value="Programa">Programa</option>
                         <option value="Planta Provincial">Planta Provincial</option>
                         <option value="Planta Municipal">Planta Municipal</option>
                         <option value="Pago Directo">Pago Directo</option>
@@ -47,10 +55,17 @@ export default function NuevoEmpleadoPage() {
                     </select>
 
                     <label htmlFor="area">Área</label>
-                    <input type="text" name="area" id="area" />
-
-                    <label htmlFor="a_cargo">Persona a cargo</label>
-                    <input type="text" name="a_cargo" id="a_cargo" />
+                    <select name="area" id="area">
+                        <option value="RR.HH">RR.HH</option>
+                        <option value="Administración">Administración</option>
+                        <option value="Formadores Deportivos">Formadores Deportivos</option>
+                        <option value="Comunicación">Comunicación</option>
+                        <option value="Juventud">Juventud</option>
+                        <option value="Tareas Operativas">Tareas Operativas</option>
+                        <option value="Gestión Ciudadana">Gestión Ciudadana</option>
+                        <option value="Promoción Institucional">Promoción Institucional</option>
+                        <option value="Tareas Generales">Tareas Generales</option>
+                    </select>
                     
                     <label htmlFor="disp">Disponibilidad horaria</label>
                     <input type="text" name="disp" id="disp" />
