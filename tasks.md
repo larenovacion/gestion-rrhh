@@ -5,7 +5,7 @@
 -   [x] Deploy a Cloudflare Pages (Vercel por el momento)
 -   [x] Cambiar db a Neon Postgres (Vercel no admite SQLite)
 -   [x] Modificar variables de entorno y redeployear
--   [ ] Crear formularios de registro de empleados (CREAR/EDITAR)
+-   [X] Crear formularios de registro de empleados (CREAR/EDITAR)
 -   [ ] Crear formularios de login y registro de usuarios
 -   [ ] Añadir acciones para manejar datos de formularios
 -   [ ] Añadir loaders para conectar db a UI
