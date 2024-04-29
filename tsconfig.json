@@ -25,6 +25,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
+    "target": "ES2022",
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {

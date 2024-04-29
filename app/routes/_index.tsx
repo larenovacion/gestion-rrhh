@@ -1,5 +1,6 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { authCookie } from "~/auth";
 
 export const meta: MetaFunction = () => {
     return [
@@ -8,7 +9,15 @@ export const meta: MetaFunction = () => {
     ];
 };
 
+export async function loader({ request }: LoaderFunctionArgs) {
+    const cookieString = request.headers.get("Cookie");
+    const userId = await authCookie.parse(cookieString);
+    return { userId };
+}
+
 export default function Index() {
+    const { userId } = useLoaderData<typeof loader>();
+
     return (
         <div className="flex flex-col h-screen items-center justify-center">
             <h1 className="text-4xl text-white">Prueba de navegación</h1>
@@ -19,12 +28,21 @@ export default function Index() {
                 >
                     Dashboard
                 </Link>
-                <Link to={"/login"} className={"bg-slate-600 p-2 rounded-lg"}>
-                    Login
-                </Link>
-                <Link to={"/signup"} className={"bg-slate-600 p-2 rounded-lg"}>
-                    Crear Usuario
-                </Link>
+                {userId === 1 ? (
+                    <Link
+                        to={"/login"}
+                        className={"bg-slate-600 p-2 rounded-lg"}
+                    >
+                        Login
+                    </Link>
+                ) : (
+                    <Link
+                        to={"/signup"}
+                        className={"bg-slate-600 p-2 rounded-lg"}
+                    >
+                        Crear Usuario
+                    </Link>
+                )}
             </div>
         </div>
     );
