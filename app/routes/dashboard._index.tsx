@@ -25,6 +25,8 @@ type WorkData = {
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     const nomina = await getNomina();
+    console.log(nomina);
+
     return json({ nomina });
 };
 
