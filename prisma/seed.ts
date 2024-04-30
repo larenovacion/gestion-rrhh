@@ -43,7 +43,6 @@ async function main() {
                     cond: "Beca",
                     studies: "Secundario Completo",
                     area: "Planificacion",
-                    a_cargo: "Maximiliano Guia",
                     disp: "Lunes, Miercoles y Viernes de 8 a 12",
                 },
             },
