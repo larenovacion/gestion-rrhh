@@ -35,8 +35,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Meta />
                 <Links />
             </head>
-            <body className="bg-slate-300 font-bold text-xl text-white">
-                <header className="w-full bg-purple-700 h-16 flex items-center justify-between">
+            <body className="bg-zinc-100">
+                <header className="w-full bg-purple-700 h-16 flex items-center justify-between absolute top-0">
                     <div className="text-2xl pl-8">
                         <Link to="/">
                             {"[ "}Inicio{" ]"}

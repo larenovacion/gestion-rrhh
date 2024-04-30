@@ -13,7 +13,5 @@ export async function validate(email: string, password: string) {
         errors.password = "La contraseña debe tener al menos 8 caracteres";
     }
 
-    console.log(errors);
-
     return Object.keys(errors).length ? errors : null;
 }
