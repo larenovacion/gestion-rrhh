@@ -13,7 +13,6 @@ export function createEmpleado({
     cond,
     studies,
     area,
-    a_cargo,
     disp,
 }: Pick<
     PersonalData & WorkData,
@@ -28,7 +27,6 @@ export function createEmpleado({
     | "cond"
     | "studies"
     | "area"
-    | "a_cargo"
     | "disp"
 >) {
     return prisma.personalData.create({
@@ -46,7 +44,6 @@ export function createEmpleado({
                     cond,
                     studies,
                     area,
-                    a_cargo,
                     disp,
                 },
             },

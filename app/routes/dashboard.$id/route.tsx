@@ -1,7 +1,12 @@
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, NavLink, useActionData } from "@remix-run/react";
+import {
+    ActionFunctionArgs,
+    LoaderFunctionArgs,
+    json,
+    redirect,
+} from "@remix-run/node";
+import { Form, NavLink, useActionData, useLoaderData } from "@remix-run/react";
 import { validate } from "./validate";
-import { createEmpleado } from "./queries";
+import { getEmpleado, updateEmpleado } from "./queries";
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
@@ -17,8 +22,9 @@ export async function action({ request }: ActionFunctionArgs) {
     const studies = String(formData.get("studies"));
     const cond = String(formData.get("cond"));
     const area = String(formData.get("area"));
-    const a_cargo = String(formData.get("a_cargo"));
     const disp = String(formData.get("disp"));
+    const url = new URL(request.url);
+    const id = url.pathname.split("/").pop();
 
     const errors = await validate(
         name,
@@ -32,7 +38,6 @@ export async function action({ request }: ActionFunctionArgs) {
         studies,
         cond,
         area,
-        a_cargo,
         disp
     );
 
@@ -40,7 +45,8 @@ export async function action({ request }: ActionFunctionArgs) {
         return json({ ok: false, errors });
     }
 
-    const empleado = await createEmpleado({
+    const empleado = await updateEmpleado({
+        id,
         name,
         DNI,
         birth,
@@ -52,7 +58,6 @@ export async function action({ request }: ActionFunctionArgs) {
         studies,
         cond,
         area,
-        a_cargo,
         disp,
     });
 
@@ -60,7 +65,7 @@ export async function action({ request }: ActionFunctionArgs) {
         return json({ ok: false, errors: { a_cargo: "Datos inválidos" } });
     }
 
-    return redirect("/dashboard");
+    return redirect("/dashboard/nomina");
 }
 
 interface ActionData {
@@ -75,13 +80,48 @@ interface ActionData {
         cond?: string;
         studies?: string;
         area?: string;
-        a_cargo?: string;
         disp?: string;
     } | null;
 }
 
-export default function NuevoEmpleadoPage() {
+interface LoaderData {
+    empleado: {
+        name: string;
+        DNI: string;
+        birth: Date;
+        kids: number;
+        address: string;
+        tel: string;
+        obvs: string;
+        workData: {
+            ant: string;
+            cond: string;
+            studies: string;
+            area: string;
+            disp: string;
+        };
+    };
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
+    const url = new URL(request.url);
+    const id = url.pathname.split("/").pop();
+    const empleado = await getEmpleado(String(id));
+    return { empleado };
+}
+
+function formateDate(dateString: Date) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+export default function EmpleadoPage() {
     const actionData: ActionData = useActionData<typeof action>();
+    const loaderData: LoaderData = useLoaderData<typeof loader>();
+    const empleado = loaderData.empleado;
 
     const nameError = actionData?.errors?.name;
     const DNIError = actionData?.errors?.DNI;
@@ -93,7 +133,6 @@ export default function NuevoEmpleadoPage() {
     const studiesError = actionData?.errors?.studies;
     const condError = actionData?.errors?.cond;
     const areaError = actionData?.errors?.area;
-    const a_cargoError = actionData?.errors?.a_cargo;
     const dispError = actionData?.errors?.disp;
 
     return (
@@ -115,7 +154,12 @@ export default function NuevoEmpleadoPage() {
                                 </span>
                             )}
                         </label>
-                        <input type="text" name="name" id="name" />
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            defaultValue={empleado.name}
+                        />
 
                         <label htmlFor="DNI">
                             DNI{" "}
@@ -123,7 +167,12 @@ export default function NuevoEmpleadoPage() {
                                 <span className="text-red-600">{DNIError}</span>
                             )}
                         </label>
-                        <input type="text" name="DNI" id="DNI" />
+                        <input
+                            type="text"
+                            name="DNI"
+                            id="DNI"
+                            defaultValue={empleado.DNI}
+                        />
 
                         <label htmlFor="birth">
                             Fecha de Nacimiento{" "}
@@ -133,7 +182,12 @@ export default function NuevoEmpleadoPage() {
                                 </span>
                             )}
                         </label>
-                        <input type="date" name="birth" id="birth" />
+                        <input
+                            type="date"
+                            name="birth"
+                            id="birth"
+                            defaultValue={formateDate(empleado.birth)}
+                        />
 
                         <label htmlFor="kids">
                             Cantidad de Hijos{" "}
@@ -143,7 +197,12 @@ export default function NuevoEmpleadoPage() {
                                 </span>
                             )}
                         </label>
-                        <input type="number" name="kids" id="kids" />
+                        <input
+                            type="number"
+                            name="kids"
+                            id="kids"
+                            defaultValue={empleado.kids}
+                        />
 
                         <label htmlFor="tel">
                             Teléfono{" "}
@@ -151,7 +210,12 @@ export default function NuevoEmpleadoPage() {
                                 <span className="text-red-600">{telError}</span>
                             )}
                         </label>
-                        <input type="tel" name="tel" id="tel" />
+                        <input
+                            type="tel"
+                            name="tel"
+                            id="tel"
+                            defaultValue={empleado.tel}
+                        />
 
                         <label htmlFor="address">
                             Domicilio{" "}
@@ -161,7 +225,12 @@ export default function NuevoEmpleadoPage() {
                                 </span>
                             )}
                         </label>
-                        <input type="text" name="address" id="address" />
+                        <input
+                            type="text"
+                            name="address"
+                            id="address"
+                            defaultValue={empleado.address}
+                        />
 
                         <label htmlFor="obvs">Obvservaciones </label>
                         <textarea
@@ -170,8 +239,10 @@ export default function NuevoEmpleadoPage() {
                             cols={30}
                             rows={5}
                             style={{ resize: "none" }}
+                            defaultValue={empleado.obvs}
                         ></textarea>
                     </div>
+
                     <div style={{ display: "flex", flexDirection: "column" }}>
                         <label htmlFor="ant">
                             Antigüedad{" "}
@@ -179,7 +250,12 @@ export default function NuevoEmpleadoPage() {
                                 <span className="text-red-600">{antError}</span>
                             )}
                         </label>
-                        <input type="text" name="ant" id="ant" />
+                        <input
+                            type="text"
+                            name="ant"
+                            id="ant"
+                            defaultValue={empleado.workData.ant}
+                        />
 
                         <label htmlFor="studies">
                             Estudios{" "}
@@ -189,7 +265,33 @@ export default function NuevoEmpleadoPage() {
                                 </span>
                             )}
                         </label>
-                        <input type="text" name="studies" id="studies" />
+                        <select
+                            name="studies"
+                            id="studies"
+                            defaultValue={empleado.workData.studies}
+                        >
+                            <option value="Primario Completo">
+                                Primario Completo
+                            </option>
+                            <option value="Secundario Incompleto">
+                                Secundario Incompleto
+                            </option>
+                            <option value="Secundario Incompleto">
+                                Secundario Incompleto
+                            </option>
+                            <option value="Terciario Incompleto">
+                                Terciario Incompleto
+                            </option>
+                            <option value="Terciario Completo">
+                                Terciario Completo
+                            </option>
+                            <option value="Universitario Incompleto">
+                                Universitario Incompleto
+                            </option>
+                            <option value="Universitario Completo">
+                                Universitario Completo
+                            </option>
+                        </select>
 
                         <label htmlFor="cond">
                             Condición{" "}
@@ -199,7 +301,11 @@ export default function NuevoEmpleadoPage() {
                                 </span>
                             )}
                         </label>
-                        <select name="cond" id="cond">
+                        <select
+                            name="cond"
+                            id="cond"
+                            defaultValue={empleado.workData.cond}
+                        >
                             <option value="Contrato">Contrato</option>
                             <option value="Planta Provincial">
                                 Planta Provincial
@@ -220,17 +326,33 @@ export default function NuevoEmpleadoPage() {
                                 </span>
                             )}
                         </label>
-                        <input type="text" name="area" id="area" />
-
-                        <label htmlFor="a_cargo">
-                            Persona a cargo{" "}
-                            {a_cargoError && (
-                                <span className="text-red-600">
-                                    {a_cargoError}
-                                </span>
-                            )}
-                        </label>
-                        <input type="text" name="a_cargo" id="a_cargo" />
+                        <select
+                            name="area"
+                            id="area"
+                            defaultValue={empleado.workData.area}
+                        >
+                            <option value="RR.HH">RR.HH</option>
+                            <option value="Administración">
+                                Administración
+                            </option>
+                            <option value="Formadores Deportivos">
+                                Formadores Deportivos
+                            </option>
+                            <option value="Comunicación">Comunicación</option>
+                            <option value="Juventud">Juventud</option>
+                            <option value="Tareas Operativas">
+                                Tareas Operativas
+                            </option>
+                            <option value="Gestión Ciudadana">
+                                Gestión Ciudadana
+                            </option>
+                            <option value="Promoción Institucional">
+                                Promoción Institucional
+                            </option>
+                            <option value="Tareas Generales">
+                                Tareas Generales
+                            </option>
+                        </select>
 
                         <label htmlFor="disp">
                             Disponibilidad horaria{" "}
@@ -240,7 +362,12 @@ export default function NuevoEmpleadoPage() {
                                 </span>
                             )}
                         </label>
-                        <input type="text" name="disp" id="disp" />
+                        <input
+                            type="text"
+                            name="disp"
+                            id="disp"
+                            defaultValue={empleado.workData.disp}
+                        />
                     </div>
                 </div>
                 <div className="flex gap-8">
@@ -248,7 +375,7 @@ export default function NuevoEmpleadoPage() {
                         type="submit"
                         className="bg-slate-600 p-2 rounded-lg text-white"
                     >
-                        Crear
+                        Actualizar
                     </button>
                     <NavLink
                         to={"/dashboard/nomina"}

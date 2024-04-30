@@ -10,7 +10,6 @@ export async function validate(
     cond: string,
     studies: string,
     area: string,
-    a_cargo: string,
     disp: string
 ) {
     const errors: {
@@ -25,7 +24,6 @@ export async function validate(
         cond?: string;
         studies?: string;
         area?: string;
-        a_cargo?: string;
         disp?: string;
     } = {};
 

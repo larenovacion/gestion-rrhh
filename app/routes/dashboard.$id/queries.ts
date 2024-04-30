@@ -19,7 +19,6 @@ export async function getEmpleado(id: string) {
                     cond: true,
                     studies: true,
                     area: true,
-                    a_cargo: true,
                     disp: true,
                 },
             },
@@ -40,7 +39,6 @@ export async function updateEmpleado({
     cond,
     studies,
     area,
-    a_cargo,
     disp,
 }: Pick<
     PersonalData & WorkData,
@@ -56,7 +54,6 @@ export async function updateEmpleado({
     | "cond"
     | "studies"
     | "area"
-    | "a_cargo"
     | "disp"
 >) {
     return prisma.personalData.update({
@@ -76,7 +73,6 @@ export async function updateEmpleado({
                         cond: cond,
                         studies: studies,
                         area: area,
-                        a_cargo: a_cargo,
                         disp: disp,
                     },
                 },

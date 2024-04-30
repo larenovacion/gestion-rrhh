@@ -11,9 +11,24 @@
 -   [x] Añadir loaders para conectar db a UI
 -   [x] Implementar autenticación
 -   [ ] Crear ruta para eliminar datos
--   [ ] Diseñar UI
 
-### WORKFLOW DE PRISMA:
+---
+
+-   [ ] MVP finalizado
+
+---
+
+#### Mejoras:
+
+-   [ ] Mejorar seguridad de las rutas con remix auth
+-   [ ] Migrar a cuentas de produccion (GitHub, Vercel, Neon)
+-   [ ] Implementar zod en verificación de formularios
+-   [ ] Diseñar y escribir UI
+-   [ ] Crear directorio de componentes de UI para agilizar migración y mantenimiento
+-   [ ] Implementar React Supsense y UI skeletons para mejorar UX
+-   [ ] Documentación de uso y mantenimiento
+
+### WORKFLOW DE [PRISMA](https://www.prisma.io/):
 
 1. Definir modelos en schema.prisma.
 2. Migrar modelos a db con: npx prisma migrate dev --name init o npx prisma db push.

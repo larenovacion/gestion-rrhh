@@ -32,7 +32,6 @@ type EmpleadoData = {
         cond: string;
         studies: string;
         area: string;
-        a_cargo: string;
         disp: string;
     };
 };
@@ -85,9 +84,6 @@ export default function NominaPage() {
                                 Area
                             </th>
                             <th className="border-solid border-2 border-slate-800 bg-slate-900 text-white px-3 py-1">
-                                Pers. a cargo
-                            </th>
-                            <th className="border-solid border-2 border-slate-800 bg-slate-900 text-white px-3 py-1">
                                 Disp. horaria
                             </th>
                             <th className="border-solid border-2 border-slate-800 bg-slate-900 text-white px-3 py-1"></th>
@@ -128,9 +124,6 @@ export default function NominaPage() {
                                 </td>
                                 <td className="border-solid border-2 text- px-3 py-1">
                                     {empleado.workData.area}
-                                </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
-                                    {empleado.workData.a_cargo}
                                 </td>
                                 <td className="border-solid border-2 text- px-3 py-1">
                                     {empleado.workData.disp}
