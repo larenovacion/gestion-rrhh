@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, MetaFunction, useActionData } from "@remix-run/react";
+import { Form, Link, MetaFunction, useActionData } from "@remix-run/react";
 import { validate } from "./validate";
 import { login } from "./queries";
 import { authCookie } from "~/auth";
@@ -104,6 +104,14 @@ export default function LoginPage() {
                         </button>
                     </div>
                 </Form>
+                <div>
+                    <p>
+                        ¿No tiene una cuenta de usuario?{" "}
+                        <Link to={"/signup"} className="text-blue-600">
+                            cree una.
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     );

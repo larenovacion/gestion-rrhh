@@ -1,12 +1,12 @@
 import {
-    Link,
+    // Link,
     Links,
     Meta,
     Outlet,
     Scripts,
     ScrollRestoration,
     redirect,
-    useLoaderData,
+    // useLoaderData,
 } from "@remix-run/react";
 
 import "./tailwind.css";
@@ -16,14 +16,12 @@ import { LoaderFunctionArgs } from "@remix-run/node";
 export async function loader({ request }: LoaderFunctionArgs) {
     const auth = await getAuthFromRequest(request);
     if (auth && new URL(request.url).pathname === "/") {
-        throw redirect("/");
+        throw redirect("/dashboard");
     }
     return auth;
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-    const userId = useLoaderData<typeof loader>();
-
     return (
         <html lang="en">
             <head>
@@ -35,32 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Meta />
                 <Links />
             </head>
-            <body className="bg-zinc-100">
-                <header className="w-full bg-purple-700 h-16 flex items-center justify-between absolute top-0">
-                    <div className="text-2xl pl-8">
-                        <Link to="/">
-                            {"[ "}Inicio{" ]"}
-                        </Link>
-                    </div>
-
-                    <div className="text-md pr-8">
-                        {userId ? (
-                            <form action="/logout" method="post">
-                                <button>
-                                    <span className="font-medium bg-purple-400 px-3 py-1 rounded-lg">
-                                        Cerrar Sesion
-                                    </span>
-                                </button>
-                            </form>
-                        ) : (
-                            <Link to="/login">
-                                <span className="font-medium bg-purple-400 px-3 py-1 rounded-lg">
-                                    Iniciar Sesion
-                                </span>
-                            </Link>
-                        )}
-                    </div>
-                </header>
+            <body className="bg-zinc-100 font-inter">
                 {children}
                 <ScrollRestoration />
                 <Scripts />
