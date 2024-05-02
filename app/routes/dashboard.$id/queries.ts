@@ -56,7 +56,7 @@ export async function updateEmpleado({
     | "area"
     | "disp"
 >) {
-    return prisma.personalData.update({
+    return await prisma.personalData.update({
         where: { id },
         data: {
             name: name,

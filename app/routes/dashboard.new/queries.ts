@@ -1,7 +1,7 @@
 import { PersonalData, WorkData } from "@prisma/client";
 import { prisma } from "~/db.server";
 
-export function createEmpleado({
+export async function createEmpleado({
     name,
     DNI,
     birth,
@@ -29,7 +29,7 @@ export function createEmpleado({
     | "area"
     | "disp"
 >) {
-    return prisma.personalData.create({
+    return await prisma.personalData.create({
         data: {
             name,
             DNI,

@@ -1,13 +1,33 @@
-import { ActionFunctionArgs, json } from "@remix-run/node";
-import { getNominaItems } from "./queries";
-import { MetaFunction, NavLink, useLoaderData } from "@remix-run/react";
+import {
+    ActionFunctionArgs,
+    LoaderFunctionArgs,
+    json,
+    redirect,
+} from "@remix-run/node";
+import { deleteItem, getNominaItems } from "./queries";
+import {
+    Form,
+    MetaFunction,
+    NavLink,
+    useActionData,
+    useLoaderData,
+} from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Dashboard" }];
 };
 
+export async function action({ request }: ActionFunctionArgs) {
+    const formData = await request.formData();
+    const id = String(formData.get("id"));
+
+    await deleteItem(id);
+
+    return redirect("/dashboard/nomina");
+}
+
 // eslint-disable-next-line  @typescript-eslint/no-unused-vars
-export async function loader({ request }: ActionFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
     const nomina = await getNominaItems();
 
     return json({ nomina });
@@ -38,8 +58,9 @@ type EmpleadoData = {
 
 export default function NominaPage() {
     const data = useLoaderData<typeof loader>();
+    const action = useActionData<typeof action>();
     const nomina = data.nomina;
-    console.log("Data: ", data);
+    // console.log("Data: ", data);
 
     return (
         <div className="w-full">
@@ -87,45 +108,46 @@ export default function NominaPage() {
                                 Disp. horaria
                             </th>
                             <th className="border-solid border-2 border-slate-800 bg-slate-900 text-white px-3 py-1"></th>
+                            <th className="border-solid border-2 border-slate-800 bg-slate-900 text-white px-3 py-1"></th>
                         </tr>
                     </thead>
                     <tbody className="border-solid border-2">
                         {nomina.map((empleado: EmpleadoData) => (
                             <tr key={empleado.id}>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.name}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.DNI}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {formateDate(empleado.birth)}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.kids}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.tel}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.address}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.obvs}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.workData.ant}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.workData.studies}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.workData.cond}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.workData.area}
                                 </td>
-                                <td className="border-solid border-2 text- px-3 py-1">
+                                <td className="border-solid border-2 px-3 py-1">
                                     {empleado.workData.disp}
                                 </td>
                                 <td className="border-solid border-2 px-3 py-1">
@@ -137,6 +159,24 @@ export default function NominaPage() {
                                     >
                                         Editar
                                     </NavLink>
+                                </td>
+                                <td className="border-solid border-2 px-3 py-1">
+                                    <Form method="post">
+                                        <input
+                                            type="text"
+                                            value={empleado.id}
+                                            id="id"
+                                            name="id"
+                                            hidden
+                                            readOnly
+                                        />
+                                        <button
+                                            // to={`/dashboard/${empleado.id}`}
+                                            className="bg-slate-200 p-2 rounded-lg mt-4"
+                                        >
+                                            Borrar
+                                        </button>
+                                    </Form>
                                 </td>
                             </tr>
                         ))}

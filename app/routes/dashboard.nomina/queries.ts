@@ -1,7 +1,7 @@
 import { prisma } from "~/db.server";
 
 export async function getNominaItems() {
-    return prisma.personalData.findMany({
+    return await prisma.personalData.findMany({
         select: {
             id: true,
             name: true,
@@ -22,4 +22,17 @@ export async function getNominaItems() {
             },
         },
     });
+}
+
+export async function deleteItem(id: string) {
+    return Promise.all([
+        await prisma.workData.deleteMany({
+            where: {
+                personalId: id,
+            },
+        }),
+        await prisma.personalData.delete({
+            where: { id },
+        }),
+    ]);
 }

@@ -10,16 +10,17 @@
 -   [x] Añadir acciones para manejar datos de formularios
 -   [x] Añadir loaders para conectar db a UI
 -   [x] Implementar autenticación
--   [ ] Crear ruta para eliminar datos
+-   [x] Crear ruta para eliminar datos
 
 ---
 
--   [ ] MVP finalizado
+-   [x] MVP finalizado
 
 ---
 
 #### Mejoras:
 
+-   [ ] Crear buscador en nómona
 -   [ ] Mejorar seguridad de las rutas con remix auth
 -   [ ] Migrar a cuentas de produccion (GitHub, Vercel, Neon)
 -   [ ] Implementar zod en verificación de formularios

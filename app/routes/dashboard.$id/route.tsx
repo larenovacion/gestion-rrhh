@@ -118,7 +118,7 @@ function formateDate(dateString: Date) {
     return `${year}-${month}-${day}`;
 }
 
-export default function EmpleadoPage() {
+export default function EditEmpleadoPage() {
     const actionData: ActionData = useActionData<typeof action>();
     const loaderData: LoaderData = useLoaderData<typeof loader>();
     const empleado = loaderData.empleado;
