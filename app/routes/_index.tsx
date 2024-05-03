@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { NavLink, useLoaderData } from "@remix-run/react";
 import { authCookie } from "~/auth";
 import { Button } from "~/components/ui/buttons";
+import { ArrowLeft, ArrowRight } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [
@@ -30,25 +31,21 @@ export default function Index() {
                     Sistema de gestión de Recursos Humanos.
                 </p>
                 <div className="flex gap-4 mt-4">
-                    {userId === null && (
+                    {userId === null ? (
                         <Button>
                             <NavLink to={"/login"}>
                                 <span className="flex gap-2">
                                     Acceder
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={1.5}
-                                        stroke="currentColor"
-                                        className="w-6 h-6"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                                        />
-                                    </svg>
+                                    <ArrowRight />
+                                </span>
+                            </NavLink>
+                        </Button>
+                    ) : (
+                        <Button>
+                            <NavLink to={"/dashboard"}>
+                                <span className="flex gap-2">
+                                    <ArrowLeft />
+                                    Volver a Dashboard
                                 </span>
                             </NavLink>
                         </Button>

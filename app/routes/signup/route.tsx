@@ -4,9 +4,16 @@ import { validate } from "./validate";
 import { authCookie } from "~/auth";
 import { createUser } from "./queries";
 import { FormWrapper } from "~/components/ui/form-wrapper";
-import { Input } from "~/components/ui/input";
 import { LogoRounded } from "~/components/ui/logo-rounded";
 import { Button } from "~/components/ui/buttons";
+import {
+    CheckBoxInput,
+    EmailInput,
+    PasswordInput,
+    TextInput,
+} from "~/components/ui/inputs";
+import { useState } from "react";
+import { ClosedEye, OpenEye } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Crear Usuario" }];
@@ -40,11 +47,18 @@ interface ActionData {
 }
 
 export default function SignUpPage() {
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
     const actionData: ActionData = useActionData<typeof action>();
 
     const nameError = actionData?.errors?.name;
     const emailError = actionData?.errors?.email;
     const passwordError = actionData?.errors?.password;
+
+    function togglePasswordVisibility() {
+        setShowPassword((prev) => !prev);
+    }
 
     return (
         <main className="grid grid-cols-2 bg-[url(https://utfs.io/f/c5f4acd3-803f-48e2-95a0-d0dccb8f3188-qqbpro.jpg)] bg-cover">
@@ -69,11 +83,10 @@ export default function SignUpPage() {
                                         </span>
                                     )}
                                 </label>
-                                <Input
-                                    type="text"
+                                <TextInput
                                     id="name"
                                     name="name"
-                                    autocomplete="name"
+                                    autoComplete="name"
                                 />
                             </div>
 
@@ -89,11 +102,10 @@ export default function SignUpPage() {
                                         </span>
                                     )}
                                 </label>
-                                <Input
-                                    type="email"
+                                <EmailInput
                                     id="email"
                                     name="email"
-                                    autocomplete="email"
+                                    autoComplete="email"
                                 />
                             </div>
 
@@ -109,12 +121,43 @@ export default function SignUpPage() {
                                         </span>
                                     )}
                                 </label>
-                                <Input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    autocomplete="current-password"
-                                />
+                                <div className="relative">
+                                    <PasswordInput
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                        id="password"
+                                        name="password"
+                                        autoComplete="current-password"
+                                    />
+                                    {password && (
+                                        <div className="flex gap-2 absolute top-3 right-0">
+                                            <CheckBoxInput
+                                                id="show-password"
+                                                name="show-password"
+                                                checked={showPassword}
+                                                onChange={
+                                                    togglePasswordVisibility
+                                                }
+                                                hidden
+                                            />
+                                            <label
+                                                htmlFor="show-password"
+                                                className="text-sm text-zinc-500"
+                                            >
+                                                {showPassword ? (
+                                                    <ClosedEye />
+                                                ) : (
+                                                    <OpenEye />
+                                                )}
+                                            </label>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="flex justify-start mt-4">

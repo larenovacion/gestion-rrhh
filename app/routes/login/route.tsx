@@ -3,10 +3,16 @@ import { Form, MetaFunction, useActionData } from "@remix-run/react";
 import { validate } from "./validate";
 import { login } from "./queries";
 import { authCookie } from "~/auth";
-import { Input } from "~/components/ui/input";
+import {
+    CheckBoxInput,
+    EmailInput,
+    PasswordInput,
+} from "~/components/ui/inputs";
 import { FormWrapper } from "~/components/ui/form-wrapper";
 import { LogoRounded } from "~/components/ui/logo-rounded";
 import { Button } from "~/components/ui/buttons";
+import { useState } from "react";
+import { ClosedEye, OpenEye } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Iniciar Sesion" }];
@@ -48,12 +54,18 @@ interface ActionData {
 }
 
 export default function LoginPage() {
+    const [password, setPassword] = useState("");
+    console.log(password);
+    const [showPassword, setShowPassword] = useState(false);
+
     const actionData: ActionData = useActionData<typeof action>();
 
     const emailError = actionData?.errors?.email;
     const passwordError = actionData?.errors?.password;
-    // console.log("Email error: ", emailError);
-    // console.log("Password error: ", passwordError);
+
+    function togglePasswordVisibility() {
+        setShowPassword((prev) => !prev);
+    }
 
     return (
         <main className="grid grid-cols-2 bg-[url(https://utfs.io/f/c5f4acd3-803f-48e2-95a0-d0dccb8f3188-qqbpro.jpg)] bg-cover">
@@ -78,11 +90,10 @@ export default function LoginPage() {
                                         </span>
                                     )}
                                 </label>
-                                <Input
-                                    type="email"
-                                    name="email"
+                                <EmailInput
                                     id="email"
-                                    autocomplete="email"
+                                    name="email"
+                                    autoComplete="email"
                                 />
                             </div>
 
@@ -98,12 +109,43 @@ export default function LoginPage() {
                                         </span>
                                     )}
                                 </label>
-                                <Input
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    autocomplete="current-password"
-                                />
+                                <div className="relative">
+                                    <PasswordInput
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                        id="password"
+                                        name="password"
+                                        autoComplete="current-password"
+                                    />
+                                    {password && (
+                                        <div className="flex gap-2 absolute top-3 right-0">
+                                            <CheckBoxInput
+                                                id="show-password"
+                                                name="show-password"
+                                                checked={showPassword}
+                                                onChange={
+                                                    togglePasswordVisibility
+                                                }
+                                                hidden
+                                            />
+                                            <label
+                                                htmlFor="show-password"
+                                                className="text-sm text-zinc-500"
+                                            >
+                                                {showPassword ? (
+                                                    <ClosedEye />
+                                                ) : (
+                                                    <OpenEye />
+                                                )}
+                                            </label>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="flex justify-start mt-4">
