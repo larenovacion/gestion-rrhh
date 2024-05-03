@@ -1,8 +1,12 @@
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, Link, MetaFunction, useActionData } from "@remix-run/react";
+import { Form, MetaFunction, useActionData } from "@remix-run/react";
 import { validate } from "./validate";
 import { login } from "./queries";
 import { authCookie } from "~/auth";
+import { Input } from "~/components/ui/input";
+import { FormWrapper } from "~/components/ui/form-wrapper";
+import { LogoRounded } from "~/components/ui/logo-rounded";
+import { Button } from "~/components/ui/buttons";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Iniciar Sesion" }];
@@ -52,67 +56,66 @@ export default function LoginPage() {
     // console.log("Password error: ", passwordError);
 
     return (
-        <div className="h-screen flex flex-col items-center justify-center text-black">
-            <h2 className="text-2xl my-6">Iniciar Sesion</h2>
-            <div className="bg-slate-100 py-6 px-10 rounded-lg font-normal">
-                <Form method="post">
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="email" className="text-sm font-medium">
-                            Ingresar email:{" "}
-                            {emailError && (
-                                <span className="text-red-600">
-                                    {emailError}
-                                </span>
-                            )}
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            required
-                            autoComplete="email"
-                        />
-                    </div>
+        <main className="grid grid-cols-2 bg-[url(https://utfs.io/f/c5f4acd3-803f-48e2-95a0-d0dccb8f3188-qqbpro.jpg)] bg-cover">
+            <div className="h-screen flex items-center justify-center">
+                <FormWrapper
+                    formTitle="Inicio de sesión"
+                    formFooter="¿No tiene una cuenta de usuario?"
+                    formLinkText="Cree una."
+                    toTarget="/signup"
+                >
+                    <Form method="post">
+                        <div className="flex flex-col gap-12">
+                            <div className="flex flex-col gap-2">
+                                <label
+                                    htmlFor="email"
+                                    className="text-sm text-zinc-500"
+                                >
+                                    Ingresar email:{" "}
+                                    {emailError && (
+                                        <span className="text-red-600">
+                                            {emailError}
+                                        </span>
+                                    )}
+                                </label>
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    autocomplete="email"
+                                />
+                            </div>
 
-                    <div className="flex flex-col gap-2 mt-4">
-                        <label
-                            htmlFor="password"
-                            className="text-sm font-medium"
-                        >
-                            Ingresar contraseña:{" "}
-                            {passwordError && (
-                                <span className="text-red-600">
-                                    {passwordError}
-                                </span>
-                            )}
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            required
-                            autoComplete="current-password"
-                        />
-                    </div>
+                            <div className="flex flex-col gap-2 mt-4">
+                                <label
+                                    htmlFor="password"
+                                    className="text-sm text-zinc-500"
+                                >
+                                    Ingresar contraseña:{" "}
+                                    {passwordError && (
+                                        <span className="text-red-600">
+                                            {passwordError}
+                                        </span>
+                                    )}
+                                </label>
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    autocomplete="current-password"
+                                />
+                            </div>
 
-                    <div className="flex justify-center mt-4">
-                        <button
-                            type="submit"
-                            className="bg-black text-white py-2 px-6 rounded-xl"
-                        >
-                            Iniciar Sesion
-                        </button>
-                    </div>
-                </Form>
-                <div>
-                    <p>
-                        ¿No tiene una cuenta de usuario?{" "}
-                        <Link to={"/signup"} className="text-blue-600">
-                            cree una.
-                        </Link>
-                    </p>
-                </div>
+                            <div className="flex justify-start mt-4">
+                                <Button>Iniciar Sesión</Button>
+                            </div>
+                        </div>
+                    </Form>
+                </FormWrapper>
             </div>
-        </div>
+            <div className="h-screen flex items-center justify-center">
+                <LogoRounded src="https://utfs.io/f/a4fd2280-5fb9-4484-a139-5d17e140d2d8-jf8mii.jpg" />
+            </div>
+        </main>
     );
 }

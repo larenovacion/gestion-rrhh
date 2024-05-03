@@ -1,8 +1,12 @@
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, Link, MetaFunction, useActionData } from "@remix-run/react";
+import { Form, MetaFunction, useActionData } from "@remix-run/react";
 import { validate } from "./validate";
 import { authCookie } from "~/auth";
 import { createUser } from "./queries";
+import { FormWrapper } from "~/components/ui/form-wrapper";
+import { Input } from "~/components/ui/input";
+import { LogoRounded } from "~/components/ui/logo-rounded";
+import { Button } from "~/components/ui/buttons";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Crear Usuario" }];
@@ -43,85 +47,86 @@ export default function SignUpPage() {
     const passwordError = actionData?.errors?.password;
 
     return (
-        <div className="h-screen flex flex-col items-center justify-center text-black">
-            <h2 className="text-2xl my-6">Crear Nuevo Usuario</h2>
-            <div className="bg-slate-100 py-6 px-10 rounded-lg font-normal">
-                <Form method="post">
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="name" className="text-sm font-medium">
-                            Nombre:{" "}
-                            {nameError && (
-                                <span className="text-red-600">
-                                    {nameError}
-                                </span>
-                            )}
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            autoComplete="name"
-                            required
-                        />
-                    </div>
+        <main className="grid grid-cols-2 bg-[url(https://utfs.io/f/c5f4acd3-803f-48e2-95a0-d0dccb8f3188-qqbpro.jpg)] bg-cover">
+            <div className="h-screen flex items-center justify-center">
+                <FormWrapper
+                    formTitle="Crear nuevo usuario"
+                    formFooter="Si ya tiene una cuenta de usuario,"
+                    formLinkText="inicie sesión."
+                    toTarget="/login"
+                >
+                    <Form method="post">
+                        <div className="flex flex-col gap-12">
+                            <div className="flex flex-col gap-2">
+                                <label
+                                    htmlFor="name"
+                                    className="text-sm font-medium"
+                                >
+                                    Nombre:{" "}
+                                    {nameError && (
+                                        <span className="text-red-600">
+                                            {nameError}
+                                        </span>
+                                    )}
+                                </label>
+                                <Input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    autocomplete="name"
+                                />
+                            </div>
 
-                    <div className="flex flex-col gap-2 mt-4">
-                        <label htmlFor="email" className="text-sm font-medium">
-                            Email:{" "}
-                            {emailError && (
-                                <span className="text-red-600">
-                                    {emailError}
-                                </span>
-                            )}
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            autoComplete="email"
-                            required
-                        />
-                    </div>
+                            <div className="flex flex-col gap-2 mt-4">
+                                <label
+                                    htmlFor="email"
+                                    className="text-sm font-medium"
+                                >
+                                    Email:{" "}
+                                    {emailError && (
+                                        <span className="text-red-600">
+                                            {emailError}
+                                        </span>
+                                    )}
+                                </label>
+                                <Input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    autocomplete="email"
+                                />
+                            </div>
 
-                    <div className="flex flex-col gap-2 mt-4">
-                        <label
-                            htmlFor="password"
-                            className="text-sm font-medium"
-                        >
-                            Contraseña:{" "}
-                            {passwordError && (
-                                <span className="text-red-600">
-                                    {passwordError}
-                                </span>
-                            )}
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            autoComplete="current-password"
-                            required
-                        />
-                    </div>
+                            <div className="flex flex-col gap-2 mt-4">
+                                <label
+                                    htmlFor="password"
+                                    className="text-sm font-medium"
+                                >
+                                    Contraseña:{" "}
+                                    {passwordError && (
+                                        <span className="text-red-600">
+                                            {passwordError}
+                                        </span>
+                                    )}
+                                </label>
+                                <Input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    autocomplete="current-password"
+                                />
+                            </div>
 
-                    <div className="flex justify-center mt-4">
-                        <button
-                            type="submit"
-                            className="bg-black text-white py-2 px-6 rounded-xl"
-                        >
-                            Crear Usuario
-                        </button>
-                    </div>
-                </Form>
-                <div>
-                    <p>
-                        Si ya tiene una cuenta de usuario,{" "}
-                        <Link to={"/login"} className="text-blue-600">
-                            inicie sesión.
-                        </Link>
-                    </p>
-                </div>
+                            <div className="flex justify-start mt-4">
+                                <Button>Crear Usuario</Button>
+                            </div>
+                        </div>
+                    </Form>
+                </FormWrapper>
             </div>
-        </div>
+            <div className="h-screen flex items-center justify-center">
+                <LogoRounded src="https://utfs.io/f/a4fd2280-5fb9-4484-a139-5d17e140d2d8-jf8mii.jpg" />
+            </div>
+        </main>
     );
 }

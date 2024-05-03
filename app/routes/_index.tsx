@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { NavLink, useLoaderData } from "@remix-run/react";
 import { authCookie } from "~/auth";
+import { Button } from "~/components/ui/buttons";
 
 export const meta: MetaFunction = () => {
     return [
@@ -28,32 +29,29 @@ export default function Index() {
                 <p className="text-zinc-500 drop-shadow-lg text-lg">
                     Sistema de gestión de Recursos Humanos.
                 </p>
-                <div className="flex flex-row gap-4 mt-4">
+                <div className="flex gap-4 mt-4">
                     {userId === null && (
-                        <Link
-                            to={"/login"}
-                            className={
-                                "bg-zinc-800 transition duration-0 hover:bg-violet-600 hover:duration-200 active:bg-violet-400 active:duration-0 py-2 px-4 rounded-lg text-white drop-shadow-lg"
-                            }
-                        >
-                            <span className="flex flex-row gap-2">
-                                Acceder
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                                    />
-                                </svg>
-                            </span>
-                        </Link>
+                        <Button>
+                            <NavLink to={"/login"}>
+                                <span className="flex gap-2">
+                                    Acceder
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="w-6 h-6"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                                        />
+                                    </svg>
+                                </span>
+                            </NavLink>
+                        </Button>
                     )}
                 </div>
             </div>
