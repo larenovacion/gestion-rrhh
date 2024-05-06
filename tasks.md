@@ -24,8 +24,8 @@
 -   [ ] Mejorar seguridad de las rutas con remix auth
 -   [ ] Migrar a cuentas de produccion (GitHub, Vercel, Neon)
 -   [ ] Implementar zod en verificación de formularios
--   [ ] Diseñar y escribir UI
--   [ ] Crear directorio de componentes de UI para agilizar migración y mantenimiento
+-   [x] Diseñar y escribir UI
+-   [x] Crear directorio de componentes de UI para agilizar migración y mantenimiento
 -   [ ] Implementar React Supsense y UI skeletons para mejorar UX
 -   [ ] Documentación de uso y mantenimiento
 

@@ -3,11 +3,7 @@ import { Form, MetaFunction, useActionData } from "@remix-run/react";
 import { validate } from "./validate";
 import { login } from "./queries";
 import { authCookie } from "~/auth";
-import {
-    CheckBoxInput,
-    EmailInput,
-    PasswordInput,
-} from "~/components/ui/inputs";
+import { Input } from "~/components/ui/inputs";
 import { FormWrapper } from "~/components/ui/form-wrapper";
 import { LogoRounded } from "~/components/ui/logo-rounded";
 import { Button } from "~/components/ui/buttons";
@@ -90,7 +86,8 @@ export default function LoginPage() {
                                         </span>
                                     )}
                                 </label>
-                                <EmailInput
+                                <Input
+                                    type="email"
                                     id="email"
                                     name="email"
                                     autoComplete="email"
@@ -110,7 +107,7 @@ export default function LoginPage() {
                                     )}
                                 </label>
                                 <div className="relative">
-                                    <PasswordInput
+                                    <Input
                                         type={
                                             showPassword ? "text" : "password"
                                         }
@@ -124,7 +121,8 @@ export default function LoginPage() {
                                     />
                                     {password && (
                                         <div className="flex gap-2 absolute top-3 right-0">
-                                            <CheckBoxInput
+                                            <Input
+                                                type="checkbox"
                                                 id="show-password"
                                                 name="show-password"
                                                 checked={showPassword}

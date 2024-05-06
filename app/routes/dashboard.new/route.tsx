@@ -2,6 +2,8 @@ import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import { Form, NavLink, useActionData } from "@remix-run/react";
 import { validate } from "./validate";
 import { createEmpleado } from "./queries";
+import { Button } from "~/components/ui/buttons";
+import { Input } from "~/components/ui/inputs";
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
@@ -92,199 +94,329 @@ export default function NuevoEmpleadoPage() {
     const dispError = actionData?.errors?.disp;
 
     return (
-        <div className="h-full flex flex-col items-center justify-around">
-            <h2 className="text-2xl text-center text-slate-600 mb-5">
+        <div className="flex flex-col w-full px-4 h-[calc(100%_-_3.5rem)]">
+            <h2 className="text-3xl text-zinc-900 w-full font-bold pb-4 drop-shadow-sm">
                 Registro de empleados
             </h2>
+
             <Form
                 method="post"
-                className="text-slate-600 flex flex-col items-start justify-around gap-32"
+                className="text-zinc-900 flex flex-col items-center justify-around"
             >
-                <div className="grid grid-cols-2 gap-8">
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                        <label htmlFor="name" /*autoFocus={true}*/>
-                            Nombre Completo{" "}
-                            {nameError && (
-                                <span className="text-red-600">
-                                    {nameError}
-                                </span>
-                            )}
-                        </label>
-                        <input type="text" name="name" id="name" />
+                <div className="grid grid-cols-2 gap-10">
+                    <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="name"
+                                className="text-sm text-zinc-500"
+                            >
+                                Nombre Completo{" "}
+                                {nameError && (
+                                    <span className="text-red-600">
+                                        {nameError}
+                                    </span>
+                                )}
+                            </label>
+                            <Input
+                                variant="filled"
+                                type="text"
+                                name="name"
+                                id="name"
+                            />
+                        </div>
 
-                        <label htmlFor="DNI">
-                            DNI{" "}
-                            {DNIError && (
-                                <span className="text-red-600">{DNIError}</span>
-                            )}
-                        </label>
-                        <input type="text" name="DNI" id="DNI" />
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="DNI"
+                                className="text-sm text-zinc-500"
+                            >
+                                DNI{" "}
+                                {DNIError && (
+                                    <span className="text-red-600">
+                                        {DNIError}
+                                    </span>
+                                )}
+                            </label>
+                            <Input
+                                variant="filled"
+                                type="text"
+                                name="DNI"
+                                id="DNI"
+                            />
+                        </div>
 
-                        <label htmlFor="birth">
-                            Fecha de Nacimiento{" "}
-                            {birthError && (
-                                <span className="text-red-600">
-                                    {birthError}
-                                </span>
-                            )}
-                        </label>
-                        <input type="date" name="birth" id="birth" />
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="birth"
+                                className="text-sm text-zinc-500"
+                            >
+                                Fecha de Nacimiento{" "}
+                                {birthError && (
+                                    <span className="text-red-600">
+                                        {birthError}
+                                    </span>
+                                )}
+                            </label>
+                            <Input
+                                variant="filled"
+                                type="date"
+                                name="birth"
+                                id="birth"
+                            />
+                        </div>
 
-                        <label htmlFor="kids">
-                            Cantidad de Hijos{" "}
-                            {kidsError && (
-                                <span className="text-red-600">
-                                    {kidsError}
-                                </span>
-                            )}
-                        </label>
-                        <input type="number" name="kids" id="kids" />
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="kids"
+                                className="text-sm text-zinc-500"
+                            >
+                                Cantidad de Hijos{" "}
+                                {kidsError && (
+                                    <span className="text-red-600">
+                                        {kidsError}
+                                    </span>
+                                )}
+                            </label>
+                            <Input
+                                variant="filled"
+                                type="number"
+                                name="kids"
+                                id="kids"
+                            />
+                        </div>
 
-                        <label htmlFor="tel">
-                            Teléfono{" "}
-                            {telError && (
-                                <span className="text-red-600">{telError}</span>
-                            )}
-                        </label>
-                        <input type="tel" name="tel" id="tel" />
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="tel"
+                                className="text-sm text-zinc-500"
+                            >
+                                Teléfono{" "}
+                                {telError && (
+                                    <span className="text-red-600">
+                                        {telError}
+                                    </span>
+                                )}
+                            </label>
+                            <Input
+                                variant="filled"
+                                type="tel"
+                                name="tel"
+                                id="tel"
+                            />
+                        </div>
 
-                        <label htmlFor="address">
-                            Domicilio{" "}
-                            {addressError && (
-                                <span className="text-red-600">
-                                    {addressError}
-                                </span>
-                            )}
-                        </label>
-                        <input type="text" name="address" id="address" />
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="address"
+                                className="text-sm text-zinc-500"
+                            >
+                                Domicilio{" "}
+                                {addressError && (
+                                    <span className="text-red-600">
+                                        {addressError}
+                                    </span>
+                                )}
+                            </label>
+                            <Input
+                                variant="filled"
+                                type="text"
+                                name="address"
+                                id="address"
+                            />
+                        </div>
 
-                        <label htmlFor="obvs">Obvservaciones </label>
-                        <textarea
-                            name="obvs"
-                            id="obvs"
-                            cols={30}
-                            rows={5}
-                            style={{ resize: "none" }}
-                        ></textarea>
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="obvs"
+                                className="text-sm text-zinc-500"
+                            >
+                                Obvservaciones{" "}
+                            </label>
+                            <textarea
+                                name="obvs"
+                                id="obvs"
+                                cols={30}
+                                rows={5}
+                                className="resize-none bg-white rounded-md p-2 focus:outline-none focus:border-blue-500"
+                            ></textarea>
+                        </div>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                        <label htmlFor="ant">
-                            Antigüedad{" "}
-                            {antError && (
-                                <span className="text-red-600">{antError}</span>
-                            )}
-                        </label>
-                        <input type="text" name="ant" id="ant" />
 
-                        <label htmlFor="studies">
-                            Estudios{" "}
-                            {studiesError && (
-                                <span className="text-red-600">
-                                    {studiesError}
-                                </span>
-                            )}
-                        </label>
-                        <select name="studies" id="studies">
-                            <option value="Primario Completo">
-                                Primario Completo
-                            </option>
-                            <option value="Secundario Incompleto">
-                                Secundario Incompleto
-                            </option>
-                            <option value="Secundario Incompleto">
-                                Secundario Incompleto
-                            </option>
-                            <option value="Terciario Incompleto">
-                                Terciario Incompleto
-                            </option>
-                            <option value="Terciario Completo">
-                                Terciario Completo
-                            </option>
-                            <option value="Universitario Incompleto">
-                                Universitario Incompleto
-                            </option>
-                            <option value="Universitario Completo">
-                                Universitario Completo
-                            </option>
-                        </select>
+                    <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="ant"
+                                className="text-sm text-zinc-500"
+                            >
+                                Antigüedad{" "}
+                                {antError && (
+                                    <span className="text-red-600">
+                                        {antError}
+                                    </span>
+                                )}
+                            </label>
+                            <Input
+                                variant="filled"
+                                type="text"
+                                name="ant"
+                                id="ant"
+                            />
+                        </div>
 
-                        <label htmlFor="cond">
-                            Condición{" "}
-                            {condError && (
-                                <span className="text-red-600">
-                                    {condError}
-                                </span>
-                            )}
-                        </label>
-                        <select name="cond" id="cond">
-                            <option value="Contrato">Contrato</option>
-                            <option value="Planta Provincial">
-                                Planta Provincial
-                            </option>
-                            <option value="Planta Municipal">
-                                Planta Municipal
-                            </option>
-                            <option value="Pago Directo">Pago Directo</option>
-                            <option value="Beca">Beca</option>
-                            <option value="Afectado">Afectado</option>
-                        </select>
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="studies"
+                                className="text-sm text-zinc-500"
+                            >
+                                Estudios{" "}
+                                {studiesError && (
+                                    <span className="text-red-600">
+                                        {studiesError}
+                                    </span>
+                                )}
+                            </label>
+                            <select
+                                name="studies"
+                                id="studies"
+                                className="bg-white p-2 rounded-md hover:opacity-70"
+                            >
+                                <option value="" selected disabled>
+                                    Selecciona una opción
+                                </option>
+                                <option value="Primario Completo">
+                                    Primario Completo
+                                </option>
+                                <option value="Secundario Incompleto">
+                                    Secundario Incompleto
+                                </option>
+                                <option value="Secundario Incompleto">
+                                    Secundario Incompleto
+                                </option>
+                                <option value="Terciario Incompleto">
+                                    Terciario Incompleto
+                                </option>
+                                <option value="Terciario Completo">
+                                    Terciario Completo
+                                </option>
+                                <option value="Universitario Incompleto">
+                                    Universitario Incompleto
+                                </option>
+                                <option value="Universitario Completo">
+                                    Universitario Completo
+                                </option>
+                            </select>
+                        </div>
 
-                        <label htmlFor="area">
-                            Área{" "}
-                            {areaError && (
-                                <span className="text-red-600">
-                                    {areaError}
-                                </span>
-                            )}
-                        </label>
-                        <select name="area" id="area">
-                            <option value="RR.HH">RR.HH</option>
-                            <option value="Administración">
-                                Administración
-                            </option>
-                            <option value="Formadores Deportivos">
-                                Formadores Deportivos
-                            </option>
-                            <option value="Comunicación">Comunicación</option>
-                            <option value="Juventud">Juventud</option>
-                            <option value="Tareas Operativas">
-                                Tareas Operativas
-                            </option>
-                            <option value="Gestión Ciudadana">
-                                Gestión Ciudadana
-                            </option>
-                            <option value="Promoción Institucional">
-                                Promoción Institucional
-                            </option>
-                            <option value="Tareas Generales">
-                                Tareas Generales
-                            </option>
-                        </select>
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="cond"
+                                className="text-sm text-zinc-500"
+                            >
+                                Condición{" "}
+                                {condError && (
+                                    <span className="text-red-600">
+                                        {condError}
+                                    </span>
+                                )}
+                            </label>
+                            <select
+                                name="cond"
+                                id="cond"
+                                className="bg-white p-2 rounded-md hover:opacity-70"
+                            >
+                                <option value="" selected disabled>
+                                    Selecciona una opción
+                                </option>
+                                <option value="Contrato">Contrato</option>
+                                <option value="Planta Provincial">
+                                    Planta Provincial
+                                </option>
+                                <option value="Planta Municipal">
+                                    Planta Municipal
+                                </option>
+                                <option value="Pago Directo">
+                                    Pago Directo
+                                </option>
+                                <option value="Beca">Beca</option>
+                                <option value="Afectado">Afectado</option>
+                            </select>
+                        </div>
 
-                        <label htmlFor="disp">
-                            Disponibilidad horaria{" "}
-                            {dispError && (
-                                <span className="text-red-600">
-                                    {dispError}
-                                </span>
-                            )}
-                        </label>
-                        <input type="text" name="disp" id="disp" />
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="area"
+                                className="text-sm text-zinc-500"
+                            >
+                                Área{" "}
+                                {areaError && (
+                                    <span className="text-red-600">
+                                        {areaError}
+                                    </span>
+                                )}
+                            </label>
+                            <select
+                                name="area"
+                                id="area"
+                                className="bg-white p-2 rounded-md hover:opacity-70"
+                            >
+                                <option value="" selected disabled>
+                                    Selecciona una opción
+                                </option>
+                                <option value="RR.HH">RR.HH</option>
+                                <option value="Administración">
+                                    Administración
+                                </option>
+                                <option value="Formadores Deportivos">
+                                    Formadores Deportivos
+                                </option>
+                                <option value="Comunicación">
+                                    Comunicación
+                                </option>
+                                <option value="Juventud">Juventud</option>
+                                <option value="Tareas Operativas">
+                                    Tareas Operativas
+                                </option>
+                                <option value="Gestión Ciudadana">
+                                    Gestión Ciudadana
+                                </option>
+                                <option value="Promoción Institucional">
+                                    Promoción Institucional
+                                </option>
+                                <option value="Tareas Generales">
+                                    Tareas Generales
+                                </option>
+                            </select>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="disp"
+                                className="text-sm text-zinc-500"
+                            >
+                                Disponibilidad horaria{" "}
+                                {dispError && (
+                                    <span className="text-red-600">
+                                        {dispError}
+                                    </span>
+                                )}
+                            </label>
+                            <Input
+                                variant="filled"
+                                type="text"
+                                name="disp"
+                                id="disp"
+                            />
+                        </div>
+
+                        <div className="flex gap-4">
+                            <Button>Crear</Button>
+                            <Button variant="delete">
+                                <NavLink to={"/dashboard/nomina"}>
+                                    Cancelar
+                                </NavLink>
+                            </Button>
+                        </div>
                     </div>
-                </div>
-                <div className="flex gap-8">
-                    <button
-                        type="submit"
-                        className="bg-slate-600 p-2 rounded-lg text-white"
-                    >
-                        Crear
-                    </button>
-                    <NavLink
-                        to={"/dashboard/nomina"}
-                        className="bg-zinc-200 p-2 rounded-lg"
-                    >
-                        Cancelar
-                    </NavLink>
                 </div>
             </Form>
         </div>

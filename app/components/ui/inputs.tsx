@@ -1,80 +1,41 @@
 import { HTMLAttributes } from "react";
 
+import { cva } from "class-variance-authority";
+
 type InputProps = HTMLAttributes<HTMLInputElement> & {
-    type?: "email" | "text" | "password" | "checkbox";
-    id: string;
+    type: string;
+    variant?: "dark" | "light" | "filled";
     name: string;
-    value?: string;
+    id: string;
     autoComplete?: string;
     checked?: boolean;
+    value?: string;
 };
 
-export function TextInput({ id, name, autoComplete, ...props }: InputProps) {
-    return (
-        <>
-            <input
-                type="text"
-                id={id}
-                name={name}
-                autoComplete={autoComplete}
-                required
-                {...props}
-                className="bg-zinc-100 py-3 border-b-2 border-b-zinc-300 focus:outline-none focus:border-b-blue-500"
-            />
-        </>
-    );
-}
-
-export function EmailInput({ id, name, autoComplete, ...props }: InputProps) {
-    return (
-        <>
-            <input
-                type="email"
-                id={id}
-                name={name}
-                required
-                autoComplete={autoComplete}
-                {...props}
-                className="bg-zinc-100 py-3 border-b-2 border-b-zinc-300 focus:outline-none focus:border-b-blue-500"
-            />
-        </>
-    );
-}
-
-export function PasswordInput({
-    type,
-    id,
-    name,
-    value,
-    autoComplete,
-    ...props
-}: InputProps) {
+export const Input = ({ type, variant, ...props }: InputProps) => {
     return (
         <>
             <input
                 type={type}
-                id={id}
-                name={name}
-                value={value}
-                autoComplete={autoComplete}
-                required
                 {...props}
-                className="bg-zinc-100 py-3 border-b-2 border-b-zinc-300 focus:outline-none focus:border-b-blue-500 w-full"
+                className={inputVariants({ variant })}
             />
         </>
     );
-}
+};
 
-export function CheckBoxInput({ name, id, checked, ...props }: InputProps) {
-    return (
-        <>
-            <input
-                type="checkbox"
-                name={name}
-                id={id}
-                checked={checked}
-                {...props}
-            />
-        </>
-    );
-}
+const inputVariants = cva(
+    "border-b-2 rounded-md border-b-zinc-300 focus:outline-none focus:border-b-blue-500 w-full",
+    {
+        variants: {
+            variant: {
+                dark: "text-white py-3 bg-transparent",
+                light: "text-black py-3 bg-transparent",
+                filled: "text-black p-2 bg-white border-none focus:ring focus:ring-zinc-300 hover:opacity-70",
+            },
+        },
+        defaultVariants: {
+            variant: "light",
+        },
+    }
+);

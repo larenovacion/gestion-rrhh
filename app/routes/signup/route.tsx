@@ -6,12 +6,7 @@ import { createUser } from "./queries";
 import { FormWrapper } from "~/components/ui/form-wrapper";
 import { LogoRounded } from "~/components/ui/logo-rounded";
 import { Button } from "~/components/ui/buttons";
-import {
-    CheckBoxInput,
-    EmailInput,
-    PasswordInput,
-    TextInput,
-} from "~/components/ui/inputs";
+import { Input } from "~/components/ui/inputs";
 import { useState } from "react";
 import { ClosedEye, OpenEye } from "~/components/ui/svgs";
 
@@ -83,7 +78,8 @@ export default function SignUpPage() {
                                         </span>
                                     )}
                                 </label>
-                                <TextInput
+                                <Input
+                                    type="text"
                                     id="name"
                                     name="name"
                                     autoComplete="name"
@@ -102,7 +98,8 @@ export default function SignUpPage() {
                                         </span>
                                     )}
                                 </label>
-                                <EmailInput
+                                <Input
+                                    type="email"
                                     id="email"
                                     name="email"
                                     autoComplete="email"
@@ -122,7 +119,7 @@ export default function SignUpPage() {
                                     )}
                                 </label>
                                 <div className="relative">
-                                    <PasswordInput
+                                    <Input
                                         type={
                                             showPassword ? "text" : "password"
                                         }
@@ -136,7 +133,8 @@ export default function SignUpPage() {
                                     />
                                     {password && (
                                         <div className="flex gap-2 absolute top-3 right-0">
-                                            <CheckBoxInput
+                                            <Input
+                                                type="checkbox"
                                                 id="show-password"
                                                 name="show-password"
                                                 checked={showPassword}
