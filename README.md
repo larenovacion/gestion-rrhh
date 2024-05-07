@@ -1,36 +1,5 @@
-# Welcome to Remix + Vite!
+# Sistema de Gestión de Recursos Humanos
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+![Home page del sistema de gestión](https://utfs.io/f/1ec11cee-9164-4af7-8d9d-9e2b7c0871e7-1wrmn.png)
 
-## Development
-
-Run the Vite dev server:
-
-```shellscript
-npm run dev
-```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
+## Documentación:
