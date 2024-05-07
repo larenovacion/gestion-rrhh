@@ -121,7 +121,7 @@ export default function NominaPage() {
                                         </NavLink>
                                     </Button>
                                 </Td>
-                                <td className="border-solid border-2 px-3 py-1">
+                                <Td>
                                     <Form method="post">
                                         <input
                                             type="text"
@@ -135,7 +135,7 @@ export default function NominaPage() {
                                             <Trash />
                                         </Button>
                                     </Form>
-                                </td>
+                                </Td>
                             </tr>
                         ))}
                     </tbody>
