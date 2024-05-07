@@ -23,15 +23,17 @@
 -   [ ] Crear buscador en nómona
 -   [ ] Mejorar seguridad de las rutas con remix auth
 -   [ ] Migrar a cuentas de produccion (GitHub, Vercel, Neon)
--   [ ] Implementar zod en verificación de formularios
+-   [ ] Implementar zod y react-hook-form en verificación de formularios
 -   [x] Diseñar y escribir UI
 -   [x] Crear directorio de componentes de UI para agilizar migración y mantenimiento
 -   [ ] Implementar React Supsense y UI skeletons para mejorar UX
 -   [ ] Documentación de uso y mantenimiento
+-   [x] Modificar db schema para añadir título y sysadmin
+-   [x] Crear sysadmin endpoint y credenciales
 
 ### WORKFLOW DE [PRISMA](https://www.prisma.io/):
 
-1. Definir modelos en schema.prisma.
-2. Migrar modelos a db con: npx prisma migrate dev --name init o npx prisma db push.
-3. Seedear con: npx tsx ./prisma/seed.ts.
-4. Dumpear la db si el seeding funciona.
+1. Definir modelos en schema.prisma
+2. Migrar modelos a db con: npx prisma migrate dev --name init o npx prisma db push
+3. Seedear con: npx tsx ./prisma/seed.ts
+4. Dumpear la db si el seeding funciona

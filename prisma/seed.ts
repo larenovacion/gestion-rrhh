@@ -42,6 +42,7 @@ async function main() {
                     ant: "Marzo de 2024",
                     cond: "Beca",
                     studies: "Secundario Completo",
+                    studies_grade: "Ingeniero de Software",
                     area: "Planificacion",
                     disp: "Lunes, Miercoles y Viernes de 8 a 12",
                 },

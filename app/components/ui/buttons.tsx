@@ -2,6 +2,7 @@ import { cva } from "class-variance-authority";
 
 type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
     variant?: "dark" | "light" | "delete";
+    disabled?: boolean;
 };
 
 export function Button({ variant, ...props }: ButtonProps) {

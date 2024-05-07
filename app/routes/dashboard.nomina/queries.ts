@@ -16,6 +16,7 @@ export async function getNominaItems() {
                     ant: true,
                     cond: true,
                     studies: true,
+                    studies_grade: true,
                     area: true,
                     disp: true,
                 },

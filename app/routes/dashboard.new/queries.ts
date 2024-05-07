@@ -12,6 +12,7 @@ export async function createEmpleado({
     ant,
     cond,
     studies,
+    studies_grade,
     area,
     disp,
 }: Pick<
@@ -26,6 +27,7 @@ export async function createEmpleado({
     | "ant"
     | "cond"
     | "studies"
+    | "studies_grade"
     | "area"
     | "disp"
 >) {
@@ -43,6 +45,7 @@ export async function createEmpleado({
                     ant,
                     cond,
                     studies,
+                    studies_grade,
                     area,
                     disp,
                 },

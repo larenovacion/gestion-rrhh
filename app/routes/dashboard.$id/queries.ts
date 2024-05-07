@@ -18,6 +18,7 @@ export async function getEmpleado(id: string) {
                     ant: true,
                     cond: true,
                     studies: true,
+                    studies_grade: true,
                     area: true,
                     disp: true,
                 },
@@ -38,6 +39,7 @@ export async function updateEmpleado({
     ant,
     cond,
     studies,
+    studies_grade,
     area,
     disp,
 }: Pick<
@@ -53,6 +55,7 @@ export async function updateEmpleado({
     | "ant"
     | "cond"
     | "studies"
+    | "studies_grade"
     | "area"
     | "disp"
 >) {
@@ -72,6 +75,7 @@ export async function updateEmpleado({
                         ant: ant,
                         cond: cond,
                         studies: studies,
+                        studies_grade: studies_grade,
                         area: area,
                         disp: disp,
                     },

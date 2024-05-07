@@ -9,6 +9,7 @@ export async function validate(
     ant: string,
     cond: string,
     studies: string,
+    studies_grade: string,
     area: string,
     disp: string
 ) {
@@ -23,6 +24,7 @@ export async function validate(
         ant?: string;
         cond?: string;
         studies?: string;
+        studies_grade?: string;
         area?: string;
         disp?: string;
     } = {};

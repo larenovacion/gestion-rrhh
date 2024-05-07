@@ -1,9 +1,18 @@
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import {
+    ActionFunctionArgs,
+    MetaFunction,
+    json,
+    redirect,
+} from "@remix-run/node";
 import { Form, NavLink, useActionData } from "@remix-run/react";
 import { validate } from "./validate";
 import { createEmpleado } from "./queries";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
+
+export const meta: MetaFunction = () => {
+    return [{ title: "Añadir Empleado" }];
+};
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
@@ -17,9 +26,12 @@ export async function action({ request }: ActionFunctionArgs) {
     const obvs = String(formData.get("obvs"));
     const ant = String(formData.get("ant"));
     const studies = String(formData.get("studies"));
+    const studies_grade = String(formData.get("studies_grade"));
     const cond = String(formData.get("cond"));
     const area = String(formData.get("area"));
     const disp = String(formData.get("disp"));
+
+    console.log(formData);
 
     const errors = await validate(
         name,
@@ -31,6 +43,7 @@ export async function action({ request }: ActionFunctionArgs) {
         obvs,
         ant,
         studies,
+        studies_grade,
         cond,
         area,
         disp
@@ -50,6 +63,7 @@ export async function action({ request }: ActionFunctionArgs) {
         obvs,
         ant,
         studies,
+        studies_grade,
         cond,
         area,
         disp,
@@ -59,7 +73,7 @@ export async function action({ request }: ActionFunctionArgs) {
         return json({ ok: false, errors: { a_cargo: "Datos inválidos" } });
     }
 
-    return redirect("/dashboard");
+    return redirect("/dashboard/nomina");
 }
 
 interface ActionData {
@@ -73,6 +87,7 @@ interface ActionData {
         ant?: string;
         cond?: string;
         studies?: string;
+        studies_grade: string;
         area?: string;
         disp?: string;
     } | null;
@@ -276,11 +291,12 @@ export default function NuevoEmpleadoPage() {
                                 )}
                             </label>
                             <select
+                                defaultValue={""}
                                 name="studies"
                                 id="studies"
                                 className="bg-white p-2 rounded-md hover:opacity-70"
                             >
-                                <option value="" selected disabled>
+                                <option value="" disabled>
                                     Selecciona una opción
                                 </option>
                                 <option value="Primario Completo">
@@ -289,8 +305,8 @@ export default function NuevoEmpleadoPage() {
                                 <option value="Secundario Incompleto">
                                     Secundario Incompleto
                                 </option>
-                                <option value="Secundario Incompleto">
-                                    Secundario Incompleto
+                                <option value="Secundario Completo">
+                                    Secundario Completo
                                 </option>
                                 <option value="Terciario Incompleto">
                                     Terciario Incompleto
@@ -309,6 +325,21 @@ export default function NuevoEmpleadoPage() {
 
                         <div className="flex flex-col gap-2">
                             <label
+                                htmlFor="studies_grade"
+                                className="text-sm text-zinc-500"
+                            >
+                                Título
+                            </label>
+                            <Input
+                                type="text"
+                                variant="filled"
+                                id="studies_grade"
+                                name="studies_grade"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <label
                                 htmlFor="cond"
                                 className="text-sm text-zinc-500"
                             >
@@ -320,11 +351,12 @@ export default function NuevoEmpleadoPage() {
                                 )}
                             </label>
                             <select
+                                defaultValue={""}
                                 name="cond"
                                 id="cond"
                                 className="bg-white p-2 rounded-md hover:opacity-70"
                             >
-                                <option value="" selected disabled>
+                                <option value="" disabled>
                                     Selecciona una opción
                                 </option>
                                 <option value="Contrato">Contrato</option>
@@ -339,6 +371,7 @@ export default function NuevoEmpleadoPage() {
                                 </option>
                                 <option value="Beca">Beca</option>
                                 <option value="Afectado">Afectado</option>
+                                <option value="Programa">Programa</option>
                             </select>
                         </div>
 
@@ -355,19 +388,20 @@ export default function NuevoEmpleadoPage() {
                                 )}
                             </label>
                             <select
+                                defaultValue={""}
                                 name="area"
                                 id="area"
                                 className="bg-white p-2 rounded-md hover:opacity-70"
                             >
-                                <option value="" selected disabled>
+                                <option value="" disabled>
                                     Selecciona una opción
                                 </option>
                                 <option value="RR.HH">RR.HH</option>
                                 <option value="Administración">
                                     Administración
                                 </option>
-                                <option value="Formadores Deportivos">
-                                    Formadores Deportivos
+                                <option value="Desarrollo Estratégico de Políticas Públicas">
+                                    Desarrollo Estratégico de Políticas Públicas
                                 </option>
                                 <option value="Comunicación">
                                     Comunicación
@@ -385,6 +419,7 @@ export default function NuevoEmpleadoPage() {
                                 <option value="Tareas Generales">
                                     Tareas Generales
                                 </option>
+                                <option value="Galpon">Galpón</option>
                             </select>
                         </div>
 

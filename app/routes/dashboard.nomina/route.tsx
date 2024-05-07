@@ -5,15 +5,10 @@ import {
     redirect,
 } from "@remix-run/node";
 import { deleteItem, getNominaItems } from "./queries";
-import {
-    Form,
-    MetaFunction,
-    NavLink,
-    useActionData,
-    useLoaderData,
-} from "@remix-run/react";
+import { Form, MetaFunction, NavLink, useLoaderData } from "@remix-run/react";
 import { Button } from "~/components/ui/buttons";
 import { Edit, NewPerson, Trash } from "~/components/ui/svgs";
+import { Td, Th } from "~/components/ui/table";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Dashboard | Nómina" }];
@@ -53,6 +48,7 @@ type EmpleadoData = {
         ant: string;
         cond: string;
         studies: string;
+        studies_grade: string;
         area: string;
         disp: string;
     };
@@ -60,9 +56,8 @@ type EmpleadoData = {
 
 export default function NominaPage() {
     const data = useLoaderData<typeof loader>();
-    const action = useActionData<typeof action>();
+
     const nomina = data.nomina;
-    // console.log("Data: ", data);
 
     return (
         <div className="flex flex-col w-full px-4 h-[calc(100%_-_3.5rem)]">
@@ -84,86 +79,40 @@ export default function NominaPage() {
                 <table className="text-sm text-nowrap">
                     <thead>
                         <tr>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Nombre
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                DNI
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Fecha de nac.
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Hijos
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Telefono
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Domicilio
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Observaciones
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Antiguedad
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Estudios
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Condicion
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Area
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3">
-                                Disp. horaria
-                            </th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3"></th>
-                            <th className="border-solid border-2 border-zinc-800 bg-zinc-900 text-white p-3"></th>
+                            <Th>Nombre</Th>
+                            <Th>DNI</Th>
+                            <Th>Fecha de nac.</Th>
+                            <Th>Hijos</Th>
+                            <Th>Telefono</Th>
+                            <Th>Domicilio</Th>
+                            <Th>Observaciones</Th>
+                            <Th>Antiguedad</Th>
+                            <Th>Estudios</Th>
+                            <Th>Título</Th>
+                            <Th>Condicion</Th>
+                            <Th>Area</Th>
+                            <Th>Disp. horaria</Th>
+                            <Th></Th>
+                            <Th></Th>
                         </tr>
                     </thead>
-                    <tbody className="border-solid border-2">
+                    <tbody>
                         {nomina.map((empleado: EmpleadoData) => (
                             <tr key={empleado.id}>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.name}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.DNI}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {formateDate(empleado.birth)}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.kids}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.tel}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.address}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.obvs}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.workData.ant}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.workData.studies}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.workData.cond}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.workData.area}
-                                </td>
-                                <td className="border-solid border-2 p-3">
-                                    {empleado.workData.disp}
-                                </td>
-                                <td className="border-solid border-2 p-3">
+                                <Td>{empleado.name}</Td>
+                                <Td>{empleado.DNI}</Td>
+                                <Td>{formateDate(empleado.birth)}</Td>
+                                <Td>{empleado.kids}</Td>
+                                <Td>{empleado.tel}</Td>
+                                <Td>{empleado.address}</Td>
+                                <Td>{empleado.obvs}</Td>
+                                <Td>{empleado.workData.ant}</Td>
+                                <Td>{empleado.workData.studies}</Td>
+                                <Td>{empleado.workData.studies_grade}</Td>
+                                <Td>{empleado.workData.cond}</Td>
+                                <Td>{empleado.workData.area}</Td>
+                                <Td>{empleado.workData.disp}</Td>
+                                <Td>
                                     <Button variant="light">
                                         <NavLink
                                             to={`/dashboard/${empleado.id}`}
@@ -171,7 +120,7 @@ export default function NominaPage() {
                                             <Edit />
                                         </NavLink>
                                     </Button>
-                                </td>
+                                </Td>
                                 <td className="border-solid border-2 px-3 py-1">
                                     <Form method="post">
                                         <input

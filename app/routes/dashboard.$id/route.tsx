@@ -1,6 +1,7 @@
 import {
     ActionFunctionArgs,
     LoaderFunctionArgs,
+    MetaFunction,
     json,
     redirect,
 } from "@remix-run/node";
@@ -9,6 +10,10 @@ import { validate } from "./validate";
 import { getEmpleado, updateEmpleado } from "./queries";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
+
+export const meta: MetaFunction = () => {
+    return [{ title: "Editar Empleado" }];
+};
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
@@ -22,6 +27,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const obvs = String(formData.get("obvs"));
     const ant = String(formData.get("ant"));
     const studies = String(formData.get("studies"));
+    const studies_grade = String(formData.get("studies_grade"));
     const cond = String(formData.get("cond"));
     const area = String(formData.get("area"));
     const disp = String(formData.get("disp"));
@@ -38,6 +44,7 @@ export async function action({ request }: ActionFunctionArgs) {
         obvs,
         ant,
         studies,
+        studies_grade,
         cond,
         area,
         disp
@@ -58,6 +65,7 @@ export async function action({ request }: ActionFunctionArgs) {
         obvs,
         ant,
         studies,
+        studies_grade,
         cond,
         area,
         disp,
@@ -109,6 +117,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     const url = new URL(request.url);
     const id = url.pathname.split("/").pop();
     const empleado = await getEmpleado(String(id));
+
     return { empleado };
 }
 
@@ -124,6 +133,7 @@ export default function EditEmpleadoPage() {
     const actionData: ActionData = useActionData<typeof action>();
     const loaderData: LoaderData = useLoaderData<typeof loader>();
     const empleado = loaderData.empleado;
+    console.log(empleado.name);
 
     const nameError = actionData?.errors?.name;
     const DNIError = actionData?.errors?.DNI;
@@ -342,8 +352,8 @@ export default function EditEmpleadoPage() {
                                 <option value="Secundario Incompleto">
                                     Secundario Incompleto
                                 </option>
-                                <option value="Secundario Incompleto">
-                                    Secundario Incompleto
+                                <option value="Secundario Completo">
+                                    Secundario Completo
                                 </option>
                                 <option value="Terciario Incompleto">
                                     Terciario Incompleto
@@ -358,6 +368,21 @@ export default function EditEmpleadoPage() {
                                     Universitario Completo
                                 </option>
                             </select>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <label
+                                htmlFor="studies_grade"
+                                className="text-sm text-zinc-500"
+                            >
+                                Título
+                            </label>
+                            <Input
+                                type="text"
+                                variant="filled"
+                                id="studies_grade"
+                                name="studies_tgrade"
+                            />
                         </div>
 
                         <div className="flex flex-col gap-2">
