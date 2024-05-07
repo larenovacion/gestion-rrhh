@@ -9,6 +9,7 @@ import { validate } from "./validate";
 import { createEmpleado } from "./queries";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
+import { Label } from "~/components/ui/label";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Añadir Empleado" }];
@@ -87,7 +88,7 @@ interface ActionData {
         ant?: string;
         cond?: string;
         studies?: string;
-        studies_grade: string;
+        studies_grade?: string;
         area?: string;
         disp?: string;
     } | null;
@@ -121,17 +122,9 @@ export default function NuevoEmpleadoPage() {
                 <div className="grid grid-cols-2 gap-10">
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="name"
-                                className="text-sm text-zinc-500"
-                            >
-                                Nombre Completo{" "}
-                                {nameError && (
-                                    <span className="text-red-600">
-                                        {nameError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="name" error={nameError}>
+                                Nombre completo
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -141,17 +134,9 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="DNI"
-                                className="text-sm text-zinc-500"
-                            >
-                                DNI{" "}
-                                {DNIError && (
-                                    <span className="text-red-600">
-                                        {DNIError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="DNI" error={DNIError}>
+                                DNi
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -161,17 +146,9 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="birth"
-                                className="text-sm text-zinc-500"
-                            >
-                                Fecha de Nacimiento{" "}
-                                {birthError && (
-                                    <span className="text-red-600">
-                                        {birthError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="birth" error={birthError}>
+                                Fecha de nacimiento
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="date"
@@ -181,17 +158,9 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="kids"
-                                className="text-sm text-zinc-500"
-                            >
-                                Cantidad de Hijos{" "}
-                                {kidsError && (
-                                    <span className="text-red-600">
-                                        {kidsError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="kids" error={kidsError}>
+                                Cantidad de hijos
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="number"
@@ -201,17 +170,9 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="tel"
-                                className="text-sm text-zinc-500"
-                            >
-                                Teléfono{" "}
-                                {telError && (
-                                    <span className="text-red-600">
-                                        {telError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="tel" error={telError}>
+                                Teléfono
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="tel"
@@ -221,17 +182,9 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="address"
-                                className="text-sm text-zinc-500"
-                            >
-                                Domicilio{" "}
-                                {addressError && (
-                                    <span className="text-red-600">
-                                        {addressError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="address" error={addressError}>
+                                Domicilio
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -241,12 +194,7 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="obvs"
-                                className="text-sm text-zinc-500"
-                            >
-                                Obvservaciones{" "}
-                            </label>
+                            <Label htmlFor="obvs">Observaciones</Label>
                             <textarea
                                 name="obvs"
                                 id="obvs"
@@ -259,17 +207,9 @@ export default function NuevoEmpleadoPage() {
 
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="ant"
-                                className="text-sm text-zinc-500"
-                            >
-                                Antigüedad{" "}
-                                {antError && (
-                                    <span className="text-red-600">
-                                        {antError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="ant" error={antError}>
+                                Antigüedad
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -279,17 +219,9 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="studies"
-                                className="text-sm text-zinc-500"
-                            >
-                                Estudios{" "}
-                                {studiesError && (
-                                    <span className="text-red-600">
-                                        {studiesError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="studies" error={studiesError}>
+                                Estudios
+                            </Label>
                             <select
                                 defaultValue={""}
                                 name="studies"
@@ -324,32 +256,19 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="studies_grade"
-                                className="text-sm text-zinc-500"
-                            >
-                                Título
-                            </label>
+                            <Label htmlFor="studies_grade">Título</Label>
                             <Input
-                                type="text"
                                 variant="filled"
-                                id="studies_grade"
+                                type="text"
                                 name="studies_grade"
+                                id="studies_grade"
                             />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="cond"
-                                className="text-sm text-zinc-500"
-                            >
-                                Condición{" "}
-                                {condError && (
-                                    <span className="text-red-600">
-                                        {condError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="cond" error={condError}>
+                                Condición
+                            </Label>
                             <select
                                 defaultValue={""}
                                 name="cond"
@@ -376,17 +295,9 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="area"
-                                className="text-sm text-zinc-500"
-                            >
-                                Área{" "}
-                                {areaError && (
-                                    <span className="text-red-600">
-                                        {areaError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="area" error={areaError}>
+                                Área
+                            </Label>
                             <select
                                 defaultValue={""}
                                 name="area"
@@ -424,17 +335,9 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label
-                                htmlFor="disp"
-                                className="text-sm text-zinc-500"
-                            >
-                                Disponibilidad horaria{" "}
-                                {dispError && (
-                                    <span className="text-red-600">
-                                        {dispError}
-                                    </span>
-                                )}
-                            </label>
+                            <Label htmlFor="disp" error={dispError}>
+                                Disponibilidad horaria
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"

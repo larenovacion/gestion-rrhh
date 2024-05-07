@@ -56,7 +56,7 @@ export default function SignUpPage() {
     }
 
     return (
-        <main className="grid grid-cols-2 bg-[url(https://utfs.io/f/c5f4acd3-803f-48e2-95a0-d0dccb8f3188-qqbpro.jpg)] bg-cover">
+        <main className="grid grid-cols-2 bg-[url(https://utfs.io/f/156df37d-02a5-4291-893b-50b9bccbe3be-if8nei.png)] bg-cover">
             <div className="h-screen flex items-center justify-center">
                 <FormWrapper
                     formTitle="Crear nuevo usuario"
@@ -64,7 +64,10 @@ export default function SignUpPage() {
                     formLinkText="inicie sesión."
                     toTarget="/login"
                 >
-                    <Form method="post">
+                    <Form
+                        method="post"
+                        className="overflow-auto scrollbar-thin"
+                    >
                         <div className="flex flex-col gap-12">
                             <div className="flex flex-col gap-2">
                                 <label
