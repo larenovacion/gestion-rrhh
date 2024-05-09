@@ -1,19 +1,16 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import {
+    Form,
     Link,
     MetaFunction,
-    NavLink,
     Outlet,
     useLoaderData,
 } from "@remix-run/react";
-import { getAuthFromRequest } from "~/auth";
+import { useState } from "react";
+import { getAuthFromRequest, getUserPermits } from "~/auth";
+import { NavLinksDesktop, NavLinksMobile } from "~/components/Navlinks";
 import { Button } from "~/components/ui/buttons";
-import {
-    Files,
-    Folder,
-    LogoHorizontalWhite,
-    Table,
-} from "~/components/ui/svgs";
+import { Close, Hamburger, LogoBlack, Reload } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Dashboard" }];
@@ -21,103 +18,85 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const auth = await getAuthFromRequest(request);
+    const hasPermits = await getUserPermits(String(auth));
 
     if (!auth) {
         throw redirect("/login");
     }
 
-    return auth;
+    return { auth, hasPermits };
 }
 
 export default function DashboardPage() {
-    const userId = useLoaderData<typeof loader>();
+    const [showMenu, setShowMenu] = useState(false);
+    const loaderData = useLoaderData<typeof loader>();
+    const userId = loaderData?.auth;
+    const hasPermits = loaderData?.hasPermits?.permits;
+
+    console.log("user id: ", userId, "| has permits? ", hasPermits);
+
+    function toggleMenu() {
+        setShowMenu(!showMenu);
+    }
 
     return (
-        <main className="grid grid-cols-[15rem_minmax(0,_1fr)] h-screen text-white">
-            <aside className="flex flex-col items-left justify-start bg-zinc-800">
-                <div className="flex flex-col gap-1 p-2">
-                    <Link
-                        to="/"
-                        className={
-                            "p-3 hover:bg-violet-900 hover:drop-shadow-md rounded-md transition duration-0 hover:duration-150"
-                        }
-                    >
-                        <LogoHorizontalWhite className="w-full h-min" />
-                    </Link>
-                    {/* <NavLink
-                        to={"/dashboard"}
-                        className={
-                            "p-3 hover:bg-violet-900 hover:drop-shadow-md rounded-md transition duration-0 hover:duration-150"
-                        }
-                    >
-                        <span className="flex gap-2">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-6 h-6"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                                />
-                            </svg>
-                            Dashboard
-                        </span>
-                    </NavLink> */}
-                    <NavLink
-                        to={"/dashboard/nomina"}
-                        className={({ isActive }) => {
-                            return isActive
-                                ? "text-violet-400 p-3 hover:bg-violet-900 hover:drop-shadow-md rounded-md transition duration-0 hover:duration-150"
-                                : "p-3 hover:bg-violet-900 rounded-md transition duration-0 hover:duration-150";
-                        }}
-                    >
-                        <span className="flex gap-2">
-                            <Table />
-                            Nómina
-                        </span>
-                    </NavLink>
-                    <Link
-                        to={
-                            "https://github.com/uno-nueve/gestion-rrhh?tab=readme-ov-file#documentaci%C3%B3n"
-                        }
-                        className={
-                            "p-3 hover:bg-violet-900 hover:drop-shadow-md rounded-md transition duration-0 hover:duration-150"
-                        }
-                    >
-                        <span className="flex gap-2">
-                            <Folder />
-                            Documentación
-                        </span>
-                    </Link>
-                    <NavLink to={""} className={"p-3 text-gray-600"}>
-                        <span className="flex gap-2">
-                            <Files />
-                            Operativos
-                        </span>
-                    </NavLink>
+        <main className="flex lg:grid grid-cols-[15rem_minmax(0,_1fr)] h-screen text-white">
+            {hasPermits ? (
+                <>
+                    <aside className="hidden lg:flex flex-col items-left justify-start bg-zinc-800">
+                        <NavLinksDesktop />
+                    </aside>
+                    <section className="w-full">
+                        <NavLinksMobile
+                            className={`absolute z-20 bottom-0 ${
+                                showMenu ? "left-0" : "-left-full"
+                            } bg-zinc-800 ease-in-out duration-300 flex flex-col h-[calc(100%_-_3.5rem)] w-3/5 max-w-60 lg:hidden`}
+                        />
+                        <header className="w-full h-14 flex items-center justify-between lg:justify-end px-2">
+                            <div className="lg:hidden">
+                                <Button variant="icon" onClick={toggleMenu}>
+                                    {showMenu ? (
+                                        <Close className="w-9" />
+                                    ) : (
+                                        <Hamburger className="w-9" />
+                                    )}
+                                </Button>
+                            </div>
+
+                            <div className="text-md">
+                                {userId ? (
+                                    <form action="/logout" method="post">
+                                        <Button variant="light">
+                                            Cerrar sesión
+                                        </Button>
+                                    </form>
+                                ) : (
+                                    <Button>
+                                        <Link to="/login" />
+                                    </Button>
+                                )}
+                            </div>
+                        </header>
+                        <Outlet />
+                    </section>
+                </>
+            ) : (
+                <div className="flex flex-col w-screen items-center justify-center gap-4">
+                    <LogoBlack className="w-56 h-56" />
+                    <h2 className="text-3xl text-zinc-800 font-semibold">
+                        Estamos dando de alta su usuario
+                    </h2>
+                    <p className="text-xl text-zinc-500">
+                        Por espere unos minutos
+                    </p>
+                    <Form reloadDocument>
+                        <Button>
+                            <Reload />
+                            Recargar
+                        </Button>
+                    </Form>
                 </div>
-            </aside>
-            <section>
-                <header className="w-full h-14 flex items-center justify-end">
-                    <div className="text-md pr-2">
-                        {userId ? (
-                            <form action="/logout" method="post">
-                                <Button variant="light">Cerrar sesión</Button>
-                            </form>
-                        ) : (
-                            <Button>
-                                <Link to="/login" />
-                            </Button>
-                        )}
-                    </div>
-                </header>
-                <Outlet />
-            </section>
+            )}
         </main>
     );
 }

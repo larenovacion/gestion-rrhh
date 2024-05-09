@@ -41,8 +41,8 @@ export default function Index() {
                 {/* <h1 className="text-5xl text-zinc-800 font-bold drop-shadow-lg">
                     La Renovación
                 </h1> */}
-                <LogoBlack className="w-72 h-72" />
-                <p className="text-zinc-500 drop-shadow-lg text-lg">
+                <LogoBlack className="w-48 h-48 md:w-72 md:h-72" />
+                <p className="text-zinc-500 drop-shadow-lg text-md md:text-lg">
                     Sistema de gestión de Recursos Humanos.
                 </p>
                 <div className="flex gap-4 mt-4">

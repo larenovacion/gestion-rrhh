@@ -160,10 +160,12 @@ export default function EditEmpleadoPage() {
                 method="post"
                 className="text-zinc-900 flex flex-col items-center justify-around"
             >
-                <div className="grid grid-cols-2 gap-10">
+                <div className="flex flex-col w-full sm:w-auto sm:grid grid-cols-2 gap-4 sm:gap-10 pb-8 sm:pb-0">
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
-                            <Label error={nameError}>Nombre completo</Label>
+                            <Label htmlFor="name" error={nameError}>
+                                Nombre completo
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -174,7 +176,9 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={DNIError}>DNI</Label>
+                            <Label htmlFor="DNI" error={DNIError}>
+                                DNI
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -185,7 +189,7 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={birthError}>
+                            <Label htmlFor="birth" error={birthError}>
                                 Fecha de nacimiento
                             </Label>
                             <Input
@@ -198,7 +202,9 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={kidsError}>Cantidad de hijos</Label>
+                            <Label htmlFor="kids" error={kidsError}>
+                                Cantidad de hijos
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="number"
@@ -209,7 +215,9 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={telError}>Teléfono</Label>
+                            <Label htmlFor="tel" error={telError}>
+                                Teléfono
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="tel"
@@ -220,7 +228,9 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={addressError}>Domicilio</Label>
+                            <Label htmlFor="address" error={addressError}>
+                                Domicilio
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -231,7 +241,7 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label>Observaciones</Label>
+                            <Label htmlFor="obvs">Observaciones</Label>
                             <textarea
                                 name="obvs"
                                 id="obvs"
@@ -245,7 +255,9 @@ export default function EditEmpleadoPage() {
 
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
-                            <Label error={antError}>Antigüedad</Label>
+                            <Label htmlFor="ant" error={antError}>
+                                Antigüedad
+                            </Label>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -256,7 +268,9 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={studiesError}>Estudios</Label>
+                            <Label htmlFor="studies" error={studiesError}>
+                                Estudios
+                            </Label>
                             <select
                                 name="studies"
                                 id="studies"
@@ -291,7 +305,7 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label>Título</Label>
+                            <Label htmlFor="studies_grade">Título</Label>
                             <Input
                                 type="text"
                                 variant="filled"
@@ -301,7 +315,9 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={condError}>Condición</Label>
+                            <Label htmlFor="cond" error={condError}>
+                                Condición
+                            </Label>
                             <select
                                 name="cond"
                                 id="cond"
@@ -327,7 +343,9 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={areaError}>Área</Label>
+                            <Label htmlFor="area" error={areaError}>
+                                Área
+                            </Label>
                             <select
                                 name="area"
                                 id="area"
@@ -364,7 +382,7 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label error={dispError}>
+                            <Label htmlFor="disp" error={dispError}>
                                 Disponibilidad horaria
                             </Label>
                             <Input
@@ -376,7 +394,7 @@ export default function EditEmpleadoPage() {
                             />
                         </div>
 
-                        <div className="flex gap-4">
+                        <div className="flex justify-center sm:justify-start gap-4">
                             <Button>Actualizar</Button>
                             <Button variant="delete">
                                 <NavLink to={"/dashboard/nomina"}>

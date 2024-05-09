@@ -13,6 +13,7 @@ model User {
   name        String
   email       String    @unique
   password    Password?
+  permits     Boolean   @default(false)
 }
 
 model Password {
@@ -45,13 +46,13 @@ model WorkData {
 }
 
 model Admin {
-  id        String  @id @default(cuid())
-  name      String
-  password  AdminPassword?
+  id            String  @id @default(cuid())
+  admin_name    String  @unique
+  password      AdminPassword?
 }
 
 model AdminPassword {
   hash      String
   adminId   String    @unique
-  user      Admin     @relation(fields: [adminId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  admin     Admin?     @relation(fields: [adminId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }

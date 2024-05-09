@@ -9,8 +9,7 @@ type LabelProps = HTMLAttributes<HTMLLabelElement> & {
 export function Label({ htmlFor, children, error, ...props }: LabelProps) {
     return (
         <label htmlFor={htmlFor} className="text-sm text-zinc-500" {...props}>
-            {children}
-            {error && <span className="text-red-600">{error}</span>}
+            {children} {error && <span className="text-red-600">{error}</span>}
         </label>
     );
 }

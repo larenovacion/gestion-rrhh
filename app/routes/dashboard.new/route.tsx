@@ -119,7 +119,7 @@ export default function NuevoEmpleadoPage() {
                 method="post"
                 className="text-zinc-900 flex flex-col items-center justify-around"
             >
-                <div className="grid grid-cols-2 gap-10">
+                <div className="flex flex-col w-full sm:w-auto sm:grid grid-cols-2 gap-4 sm:gap-10 pb-8 sm:pb-0">
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="name" error={nameError}>
@@ -135,7 +135,7 @@ export default function NuevoEmpleadoPage() {
 
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="DNI" error={DNIError}>
-                                DNi
+                                DNI
                             </Label>
                             <Input
                                 variant="filled"
@@ -199,7 +199,7 @@ export default function NuevoEmpleadoPage() {
                                 name="obvs"
                                 id="obvs"
                                 cols={30}
-                                rows={5}
+                                rows={4}
                                 className="resize-none bg-white rounded-md p-2 focus:outline-none focus:border-blue-500"
                             ></textarea>
                         </div>
@@ -346,7 +346,7 @@ export default function NuevoEmpleadoPage() {
                             />
                         </div>
 
-                        <div className="flex gap-4">
+                        <div className="flex justify-center sm:justify-start gap-4">
                             <Button>Crear</Button>
                             <Button variant="delete">
                                 <NavLink to={"/dashboard/nomina"}>

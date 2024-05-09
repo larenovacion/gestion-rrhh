@@ -56,7 +56,7 @@ export default function SignUpPage() {
     }
 
     return (
-        <main className="grid grid-cols-2 bg-[url(https://utfs.io/f/156df37d-02a5-4291-893b-50b9bccbe3be-if8nei.png)] bg-cover">
+        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/156df37d-02a5-4291-893b-50b9bccbe3be-if8nei.png)] bg-cover">
             <div className="h-screen flex items-center justify-center">
                 <FormWrapper
                     formTitle="Crear nuevo usuario"
@@ -168,7 +168,7 @@ export default function SignUpPage() {
                     </Form>
                 </FormWrapper>
             </div>
-            <div className="h-screen flex items-center justify-center">
+            <div className="hidden h-screen lg:flex items-center justify-center">
                 <LogoRounded src="https://utfs.io/f/a4fd2280-5fb9-4484-a139-5d17e140d2d8-jf8mii.jpg" />
             </div>
         </main>
