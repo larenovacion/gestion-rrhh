@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 type SVGProps = HTMLAttributes<SVGElement>;
 
-export function OpenEye() {
+export function OpenEye(props: SVGProps) {
     return (
         <>
             <svg
@@ -11,6 +11,7 @@ export function OpenEye() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -27,7 +28,7 @@ export function OpenEye() {
     );
 }
 
-export function ClosedEye() {
+export function ClosedEye(props: SVGProps) {
     return (
         <>
             <svg
@@ -37,6 +38,7 @@ export function ClosedEye() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -48,7 +50,7 @@ export function ClosedEye() {
     );
 }
 
-export function Edit() {
+export function Edit(props: SVGProps) {
     return (
         <>
             <svg
@@ -58,6 +60,7 @@ export function Edit() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -69,7 +72,7 @@ export function Edit() {
     );
 }
 
-export function Trash() {
+export function Trash(props: SVGProps) {
     return (
         <>
             <svg
@@ -79,6 +82,7 @@ export function Trash() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -90,7 +94,7 @@ export function Trash() {
     );
 }
 
-export function ArrowLeft() {
+export function ArrowLeft(props: SVGProps) {
     return (
         <>
             <svg
@@ -100,6 +104,7 @@ export function ArrowLeft() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -111,7 +116,7 @@ export function ArrowLeft() {
     );
 }
 
-export function ArrowRight() {
+export function ArrowRight(props: SVGProps) {
     return (
         <>
             <svg
@@ -121,6 +126,7 @@ export function ArrowRight() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -132,7 +138,7 @@ export function ArrowRight() {
     );
 }
 
-export function NewPerson() {
+export function NewPerson(props: SVGProps) {
     return (
         <>
             <svg
@@ -142,6 +148,7 @@ export function NewPerson() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -153,7 +160,7 @@ export function NewPerson() {
     );
 }
 
-export function LoaderDots() {
+export function LoaderDots(props: SVGProps) {
     return (
         <>
             <svg
@@ -161,6 +168,7 @@ export function LoaderDots() {
                 height="24"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
+                {...props}
             >
                 <circle className="spinner_S1WN" cx="4" cy="12" r="3" />
                 <circle
@@ -374,7 +382,7 @@ export function LogoWhite(props: SVGProps) {
     );
 }
 
-export function Folder() {
+export function Folder(props: SVGProps) {
     return (
         <>
             <svg
@@ -384,6 +392,7 @@ export function Folder() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -395,7 +404,7 @@ export function Folder() {
     );
 }
 
-export function Table() {
+export function Table(props: SVGProps) {
     return (
         <>
             <svg
@@ -405,6 +414,7 @@ export function Table() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -416,7 +426,7 @@ export function Table() {
     );
 }
 
-export function Files() {
+export function Files(props: SVGProps) {
     return (
         <>
             <svg
@@ -426,6 +436,7 @@ export function Files() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
@@ -437,7 +448,7 @@ export function Files() {
     );
 }
 
-export function List() {
+export function List(props: SVGProps) {
     return (
         <>
             <svg
@@ -447,11 +458,78 @@ export function List() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
+                {...props}
             >
                 <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                />
+            </svg>
+        </>
+    );
+}
+
+export function Hamburger(props: SVGProps) {
+    return (
+        <>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+                {...props}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+            </svg>
+        </>
+    );
+}
+
+export function Close(props: SVGProps) {
+    return (
+        <>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+                {...props}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                />
+            </svg>
+        </>
+    );
+}
+
+export function Reload(props: SVGProps) {
+    return (
+        <>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+                {...props}
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
                 />
             </svg>
         </>

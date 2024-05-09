@@ -14,7 +14,7 @@ export function FormWrapper({
     toTarget: string;
 }) {
     return (
-        <div className="bg-zinc-100 h-5/6 w-4/6 p-10 flex flex-col justify-between rounded-md">
+        <div className="bg-zinc-100 h-full w-full sm:h-5/6 sm:w-4/6 p-10 flex flex-col justify-between rounded-md">
             <h2 className="text-3xl font-semibold drop">{formTitle}</h2>
             {children}
             <div>

@@ -51,7 +51,6 @@ interface ActionData {
 
 export default function LoginPage() {
     const [password, setPassword] = useState("");
-    console.log(password);
     const [showPassword, setShowPassword] = useState(false);
 
     const actionData: ActionData = useActionData<typeof action>();
@@ -64,7 +63,7 @@ export default function LoginPage() {
     }
 
     return (
-        <main className="grid grid-cols-2 bg-[url(https://utfs.io/f/2d4eecf6-9cde-4f13-bd65-83c1d2d01682-if8nei.svg)] bg-cover">
+        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/2d4eecf6-9cde-4f13-bd65-83c1d2d01682-if8nei.svg)] bg-cover">
             <div className="h-screen flex items-center justify-center">
                 <FormWrapper
                     formTitle="Inicio de sesión"
@@ -156,7 +155,7 @@ export default function LoginPage() {
                     </Form>
                 </FormWrapper>
             </div>
-            <div className="h-screen flex items-center justify-center">
+            <div className="hidden h-screen lg:flex items-center justify-center">
                 <LogoRounded src="https://utfs.io/f/a4fd2280-5fb9-4484-a139-5d17e140d2d8-jf8mii.jpg" />
             </div>
         </main>

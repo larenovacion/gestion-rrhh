@@ -22,7 +22,7 @@
 
 -   [ ] Crear buscador en nómona
 -   [ ] Mejorar seguridad de las rutas con remix auth
--   [ ] Migrar a cuentas de produccion (GitHub, Vercel, Neon)
+-   [ ] Migrar a cuentas de produccion (GitHub, Vercel, etc)
 -   [ ] Implementar zod y react-hook-form en verificación de formularios
 -   [x] Diseñar y escribir UI
 -   [x] Crear directorio de componentes de UI para agilizar migración y mantenimiento
@@ -30,6 +30,7 @@
 -   [ ] Documentación de uso y mantenimiento
 -   [x] Modificar db schema para añadir título y sysadmin
 -   [x] Crear sysadmin endpoint y credenciales
+-   [x] Añadir proceso de verificación de permisos de usuarios
 
 ### WORKFLOW DE [PRISMA](https://www.prisma.io/):
 
