@@ -33,8 +33,6 @@ export default function DashboardPage() {
     const userId = loaderData?.auth;
     const hasPermits = loaderData?.hasPermits?.permits;
 
-    console.log("user id: ", userId, "| has permits? ", hasPermits);
-
     function toggleMenu() {
         setShowMenu(!showMenu);
     }
@@ -87,14 +85,19 @@ export default function DashboardPage() {
                         Estamos dando de alta su usuario
                     </h2>
                     <p className="text-xl text-zinc-500">
-                        Por espere unos minutos
+                        Por favor, espere unos minutos
                     </p>
-                    <Form reloadDocument>
-                        <Button>
-                            <Reload />
-                            Recargar
-                        </Button>
-                    </Form>
+                    <div className="flex gap-6">
+                        <Form reloadDocument>
+                            <Button>
+                                <Reload />
+                                Recargar
+                            </Button>
+                        </Form>
+                        <form action="/logout" method="post">
+                            <Button variant="light">Cerrar sesión</Button>
+                        </form>
+                    </div>
                 </div>
             )}
         </main>

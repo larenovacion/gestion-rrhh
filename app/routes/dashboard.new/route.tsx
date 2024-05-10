@@ -32,8 +32,6 @@ export async function action({ request }: ActionFunctionArgs) {
     const area = String(formData.get("area"));
     const disp = String(formData.get("disp"));
 
-    console.log(formData);
-
     const errors = await validate(
         name,
         DNI,

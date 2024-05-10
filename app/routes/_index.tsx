@@ -33,7 +33,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
     const { userId } = useLoaderData<typeof loader>();
-    console.log(userId);
 
     return (
         <main className="bg-[url(https://utfs.io/f/82943412-5579-4174-86b4-2440dc88cf07-oz9zf.svg)] bg-auto">
