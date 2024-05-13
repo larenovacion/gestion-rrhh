@@ -4,12 +4,13 @@ import {
     json,
     redirect,
 } from "@remix-run/node";
-import { Form, NavLink, useActionData } from "@remix-run/react";
+import { Form, NavLink, useActionData, useNavigation } from "@remix-run/react";
 import { validate } from "./validate";
 import { createEmpleado } from "./queries";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
 import { Label } from "~/components/ui/label";
+import { LoaderDots } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Añadir Empleado" }];
@@ -94,6 +95,7 @@ interface ActionData {
 
 export default function NuevoEmpleadoPage() {
     const actionData: ActionData = useActionData<typeof action>();
+    const navigation = useNavigation();
 
     const nameError = actionData?.errors?.name;
     const DNIError = actionData?.errors?.DNI;
@@ -345,7 +347,16 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex justify-center sm:justify-start gap-4">
-                            <Button>Crear</Button>
+                            <Button
+                                disabled={navigation.state === "submitting"}
+                            >
+                                {navigation.state === "submitting" ? (
+                                    <LoaderDots />
+                                ) : (
+                                    ""
+                                )}
+                                Crear
+                            </Button>
                             <Button variant="delete">
                                 <NavLink to={"/dashboard/nomina"}>
                                     Cancelar

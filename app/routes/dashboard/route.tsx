@@ -29,17 +29,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function DashboardPage() {
     const [showMenu, setShowMenu] = useState(false);
-    const loaderData = useLoaderData<typeof loader>();
-    const userId = loaderData?.auth;
-    const hasPermits = loaderData?.hasPermits?.permits;
+    const { auth, hasPermits } = useLoaderData<typeof loader>();
+    const userId = auth;
+    const userPermits = hasPermits?.permits;
 
     function toggleMenu() {
         setShowMenu(!showMenu);
     }
 
     return (
-        <main className="flex lg:grid grid-cols-[15rem_minmax(0,_1fr)] h-screen text-white">
-            {hasPermits ? (
+        <main className="flex lg:grid grid-cols-[15rem_minmax(0,_1fr)] h-screen text-white overflow-hidden">
+            {userPermits ? (
                 <>
                     <aside className="hidden lg:flex flex-col items-left justify-start bg-zinc-800">
                         <NavLinksDesktop />

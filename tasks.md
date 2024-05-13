@@ -21,7 +21,7 @@
 #### Mejoras:
 
 -   [ ] Crear buscador en nómona
--   [ ] Mejorar seguridad de las rutas con remix auth
+-   [x] Mejorar seguridad de las rutas con remix auth
 -   [ ] Migrar a cuentas de produccion (GitHub, Vercel, etc)
 -   [ ] Implementar zod y react-hook-form en verificación de formularios
 -   [x] Diseñar y escribir UI

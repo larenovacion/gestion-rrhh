@@ -168,6 +168,7 @@ export function LoaderDots(props: SVGProps) {
                 height="24"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
+                fill="#ffffff"
                 {...props}
             >
                 <circle className="spinner_S1WN" cx="4" cy="12" r="3" />

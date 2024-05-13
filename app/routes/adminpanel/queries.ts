@@ -22,3 +22,9 @@ export async function updatePermits({
         },
     });
 }
+
+export async function deleteUser(id: User["id"]) {
+    await prisma.user.delete({
+        where: { id },
+    });
+}

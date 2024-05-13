@@ -1,5 +1,10 @@
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, MetaFunction, useActionData } from "@remix-run/react";
+import {
+    Form,
+    MetaFunction,
+    useActionData,
+    useNavigation,
+} from "@remix-run/react";
 import { validate } from "./validate";
 import { login } from "./queries";
 import { authCookie } from "~/auth";
@@ -8,7 +13,7 @@ import { FormWrapper } from "~/components/ui/form-wrapper";
 import { LogoRounded } from "~/components/ui/logo-rounded";
 import { Button } from "~/components/ui/buttons";
 import { useState } from "react";
-import { ClosedEye, OpenEye } from "~/components/ui/svgs";
+import { ClosedEye, LoaderDots, OpenEye } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Iniciar Sesion" }];
@@ -54,6 +59,7 @@ export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
 
     const actionData: ActionData = useActionData<typeof action>();
+    const navigation = useNavigation();
 
     const emailError = actionData?.errors?.email;
     const passwordError = actionData?.errors?.password;
@@ -63,7 +69,7 @@ export default function LoginPage() {
     }
 
     return (
-        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/2d4eecf6-9cde-4f13-bd65-83c1d2d01682-if8nei.svg)] bg-cover">
+        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/3fa2b511-6bc2-47e4-a2e7-d113b01a6c29-p9fszj.png)] bg-cover bg-no-repeat">
             <div className="h-screen flex items-center justify-center">
                 <FormWrapper
                     formTitle="Inicio de sesión"
@@ -149,7 +155,16 @@ export default function LoginPage() {
                             </div>
 
                             <div className="flex justify-start mt-4">
-                                <Button>Iniciar Sesión</Button>
+                                <Button
+                                    disabled={navigation.state === "submitting"}
+                                >
+                                    {navigation.state === "submitting" ? (
+                                        <LoaderDots />
+                                    ) : (
+                                        ""
+                                    )}
+                                    Iniciar Sesión
+                                </Button>
                             </div>
                         </div>
                     </Form>

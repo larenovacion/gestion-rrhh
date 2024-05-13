@@ -1,5 +1,10 @@
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, MetaFunction, useActionData } from "@remix-run/react";
+import {
+    Form,
+    MetaFunction,
+    useActionData,
+    useNavigation,
+} from "@remix-run/react";
 import { validate } from "./validate";
 import { authCookie } from "~/auth";
 import { createTransporter, createUser } from "./queries";
@@ -8,7 +13,7 @@ import { LogoRounded } from "~/components/ui/logo-rounded";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
 import { useState } from "react";
-import { ClosedEye, OpenEye } from "~/components/ui/svgs";
+import { ClosedEye, LoaderDots, OpenEye } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Crear Usuario" }];
@@ -160,6 +165,7 @@ export default function SignUpPage() {
     const [showPassword, setShowPassword] = useState(false);
 
     const actionData: ActionData = useActionData<typeof action>();
+    const navigation = useNavigation();
 
     const nameError = actionData?.errors?.name;
     const emailError = actionData?.errors?.email;
@@ -170,7 +176,7 @@ export default function SignUpPage() {
     }
 
     return (
-        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/156df37d-02a5-4291-893b-50b9bccbe3be-if8nei.png)] bg-cover">
+        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/3fa2b511-6bc2-47e4-a2e7-d113b01a6c29-p9fszj.png)] bg-cover">
             <div className="h-screen flex items-center justify-center">
                 <FormWrapper
                     formTitle="Crear nuevo usuario"
@@ -276,7 +282,16 @@ export default function SignUpPage() {
                             </div>
 
                             <div className="flex justify-start mt-4">
-                                <Button>Crear Usuario</Button>
+                                <Button
+                                    disabled={navigation.state === "submitting"}
+                                >
+                                    {navigation.state === "submitting" ? (
+                                        <LoaderDots />
+                                    ) : (
+                                        ""
+                                    )}
+                                    Crear Usuario
+                                </Button>
                             </div>
                         </div>
                     </Form>

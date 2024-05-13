@@ -1,4 +1,9 @@
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import {
+    ActionFunctionArgs,
+    MetaFunction,
+    json,
+    redirect,
+} from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
@@ -8,6 +13,10 @@ import { Label } from "~/components/ui/label";
 import { useState } from "react";
 import { ClosedEye, OpenEye } from "~/components/ui/svgs";
 import { adminCookie } from "~/auth";
+
+export const meta: MetaFunction = () => {
+    return [{ title: "Admin | Login" }];
+};
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();

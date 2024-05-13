@@ -1,21 +1,33 @@
 import {
     ActionFunctionArgs,
     LoaderFunctionArgs,
+    MetaFunction,
     json,
     redirect,
 } from "@remix-run/node";
 import { getAdminAuth } from "~/auth";
-import { getUser, getUsers, updatePermits } from "./queries";
-import { Form, useLoaderData } from "@remix-run/react";
+import { deleteUser, getUser, getUsers, updatePermits } from "./queries";
+import { Form, useLoaderData, useNavigation } from "@remix-run/react";
 import { User } from "@prisma/client";
 import { Button } from "~/components/ui/buttons";
 import { Trash } from "~/components/ui/svgs";
 import { createTransporter } from "../signup/queries";
 
+export const meta: MetaFunction = () => {
+    return [{ title: "Admin Panel" }];
+};
+
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
+    const action = formData.get("action");
     const id = String(formData.get("user_id"));
     const email = String(formData.get("user_email"));
+
+    if (action === "delete") {
+        await deleteUser(id);
+
+        return redirect("/adminpanel");
+    }
 
     const user = await getUser(id);
     const permits = Boolean(!user?.permits);
@@ -52,8 +64,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function AdminPanelPage() {
-    const loaderData = useLoaderData<typeof loader>();
-    const users = loaderData.users;
+    const { users } = useLoaderData<typeof loader>();
+    const navigation = useNavigation();
 
     return (
         <main className="h-screen bg-black text-white flex flex-col overflow-hidden">
@@ -62,34 +74,42 @@ export default function AdminPanelPage() {
                     Admin Panel
                 </h1>
                 <section className="w-full">
-                    <div className="flex justify-center w-full h-5/6">
+                    <div className="flex justify-center w-full max-h-5/6">
                         <div className="text-gray-700 pb-4 w-max overflow-auto md:overflow-x-hidden scrollbar-thin">
-                            <table className="text-sm text-nowrap">
+                            <table className="text-md text-nowrap">
                                 <thead>
-                                    <tr>
-                                        <th className="bg-white text-zinc-900 border-solid border-2 border-zinc-900 p-3">
+                                    <tr className="bg-white text-zinc-900">
+                                        <th className="border-solid border-2 border-zinc-100 p-3">
                                             Nombre de Usuario
                                         </th>
-                                        <th className="bg-white text-zinc-900 border-solid border-2 border-zinc-900 p-3">
+                                        <th className="border-solid border-2 border-zinc-100 p-3">
                                             Email
                                         </th>
-                                        <th className="bg-white text-zinc-900 border-solid border-2 border-zinc-900 p-3">
+                                        <th className="border-solid border-2 border-zinc-100 p-3">
                                             Permisos
                                         </th>
-                                        <th className="bg-white text-zinc-900 border-solid border-2 border-zinc-900 p-3"></th>
+                                        <th className="border-solid border-2 border-zinc-100 p-3"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {users.map((user: User) => (
-                                        <tr key={user.id}>
-                                            <td className="text-zinc-100 border-solid border-2 border-zinc-900 p-3">
+                                        <tr
+                                            key={user.id}
+                                            className="text-zinc-100"
+                                        >
+                                            <td className="border-solid border-2 border-zinc-900 p-3">
                                                 {user.name}
                                             </td>
-                                            <td className="text-zinc-100 border-solid border-2 border-zinc-900 p-3">
+                                            <td className="border-solid border-2 border-zinc-900 p-3">
                                                 {user.email}
                                             </td>
-                                            <td className="text-zinc-100 border-solid border-2 border-zinc-900 p-3">
+                                            <td className="border-solid border-2 border-zinc-900 p-3">
                                                 <Form method="post">
+                                                    <input
+                                                        type="hidden"
+                                                        name="action"
+                                                        value="permits"
+                                                    />
                                                     <input
                                                         type="text"
                                                         id="user_id"
@@ -107,7 +127,13 @@ export default function AdminPanelPage() {
                                                         readOnly
                                                     />
                                                     {user.permits === false ? (
-                                                        <Button variant="light">
+                                                        <Button
+                                                            variant="light"
+                                                            disabled={
+                                                                navigation.state ===
+                                                                "submitting"
+                                                            }
+                                                        >
                                                             Permitir
                                                         </Button>
                                                     ) : (
@@ -118,9 +144,24 @@ export default function AdminPanelPage() {
                                                 </Form>
                                             </td>
                                             <td className="text-zinc-100 border-solid border-2 border-zinc-900 p-3">
-                                                <Button variant="icon">
-                                                    <Trash className="text-zinc-500 h-8 hover:text-red-400 transition-colors duration-200" />
-                                                </Button>
+                                                <Form method="post">
+                                                    <input
+                                                        type="hidden"
+                                                        name="action"
+                                                        value="delete"
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        id="user_id"
+                                                        name="user_id"
+                                                        value={user.id}
+                                                        hidden
+                                                        readOnly
+                                                    />
+                                                    <Button variant="delete">
+                                                        <Trash className=" h-5 transition-colors duration-200" />
+                                                    </Button>
+                                                </Form>
                                             </td>
                                         </tr>
                                     ))}
