@@ -1,7 +1,13 @@
 import { cva } from "class-variance-authority";
 
 type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
-    variant?: "dark" | "light" | "delete" | "icon";
+    variant?:
+        | "dark"
+        | "dark_nopad"
+        | "light"
+        | "light_nopad"
+        | "delete"
+        | "icon";
     disabled?: boolean;
     className?: string;
 };
@@ -16,7 +22,11 @@ const buttonVariants = cva(
         variants: {
             variant: {
                 dark: "bg-zinc-800 text-white hover:bg-violet-600 active:bg-violet-400 py-2 px-4",
+                dark_nopad:
+                    "bg-zinc-800 text-white hover:bg-violet-600 active:bg-violet-400",
                 light: "bg-white text-zinc-800 hover:text-white hover:bg-violet-600 active:bg-violet-400 py-2 px-4",
+                light_nopad:
+                    "bg-white text-zinc-800 hover:text-white hover:bg-violet-600 active:bg-violet-400",
                 delete: "bg-white text-zinc-800 hover:text-white hover:bg-red-400 active:bg-violet-400 py-2 px-4",
                 icon: "bg-transparent text-zinc-800",
             },

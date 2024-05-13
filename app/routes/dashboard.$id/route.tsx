@@ -5,12 +5,19 @@ import {
     json,
     redirect,
 } from "@remix-run/node";
-import { Form, NavLink, useActionData, useLoaderData } from "@remix-run/react";
+import {
+    Form,
+    NavLink,
+    useActionData,
+    useLoaderData,
+    useNavigation,
+} from "@remix-run/react";
 import { validate } from "./validate";
 import { getEmpleado, updateEmpleado } from "./queries";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
 import { Label } from "~/components/ui/label";
+import { LoaderDots } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Editar Empleado" }];
@@ -135,8 +142,8 @@ function formateDate(dateString: Date) {
 
 export default function EditEmpleadoPage() {
     const actionData: ActionData = useActionData<typeof action>();
-    const loaderData: LoaderData = useLoaderData<typeof loader>();
-    const empleado = loaderData.empleado;
+    const { empleado }: LoaderData = useLoaderData<typeof loader>();
+    const navigation = useNavigation();
 
     const nameError = actionData?.errors?.name;
     const DNIError = actionData?.errors?.DNI;
@@ -395,7 +402,16 @@ export default function EditEmpleadoPage() {
                         </div>
 
                         <div className="flex justify-center sm:justify-start gap-4">
-                            <Button>Actualizar</Button>
+                            <Button
+                                disabled={navigation.state === "submitting"}
+                            >
+                                {navigation.state === "submitting" ? (
+                                    <LoaderDots />
+                                ) : (
+                                    ""
+                                )}
+                                Actualizar
+                            </Button>
                             <Button variant="delete">
                                 <NavLink to={"/dashboard/nomina"}>
                                     Cancelar

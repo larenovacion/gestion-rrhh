@@ -21,7 +21,7 @@
 #### Mejoras:
 
 -   [ ] Crear buscador en nómona
--   [ ] Mejorar seguridad de las rutas con remix auth
+-   [x] Mejorar seguridad de las rutas con remix auth
 -   [ ] Migrar a cuentas de produccion (GitHub, Vercel, etc)
 -   [ ] Implementar zod y react-hook-form en verificación de formularios
 -   [x] Diseñar y escribir UI
@@ -31,6 +31,9 @@
 -   [x] Modificar db schema para añadir título y sysadmin
 -   [x] Crear sysadmin endpoint y credenciales
 -   [x] Añadir proceso de verificación de permisos de usuarios
+-   [x] Añadir sistema de notificaiones por mail para el manejo de permisos de usuario
+-   [x] Diseñar mail html
+-   [x] Solucionar bug de autenticación para usuario sin permisos
 
 ### WORKFLOW DE [PRISMA](https://www.prisma.io/):
 

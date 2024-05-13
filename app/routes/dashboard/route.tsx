@@ -29,19 +29,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function DashboardPage() {
     const [showMenu, setShowMenu] = useState(false);
-    const loaderData = useLoaderData<typeof loader>();
-    const userId = loaderData?.auth;
-    const hasPermits = loaderData?.hasPermits?.permits;
-
-    console.log("user id: ", userId, "| has permits? ", hasPermits);
+    const { auth, hasPermits } = useLoaderData<typeof loader>();
+    const userId = auth;
+    const userPermits = hasPermits?.permits;
 
     function toggleMenu() {
         setShowMenu(!showMenu);
     }
 
     return (
-        <main className="flex lg:grid grid-cols-[15rem_minmax(0,_1fr)] h-screen text-white">
-            {hasPermits ? (
+        <main className="flex lg:grid grid-cols-[15rem_minmax(0,_1fr)] h-screen text-white overflow-hidden">
+            {userPermits ? (
                 <>
                     <aside className="hidden lg:flex flex-col items-left justify-start bg-zinc-800">
                         <NavLinksDesktop />
@@ -87,14 +85,19 @@ export default function DashboardPage() {
                         Estamos dando de alta su usuario
                     </h2>
                     <p className="text-xl text-zinc-500">
-                        Por espere unos minutos
+                        Por favor, espere unos minutos
                     </p>
-                    <Form reloadDocument>
-                        <Button>
-                            <Reload />
-                            Recargar
-                        </Button>
-                    </Form>
+                    <div className="flex gap-6">
+                        <Form reloadDocument>
+                            <Button>
+                                <Reload />
+                                Recargar
+                            </Button>
+                        </Form>
+                        <form action="/logout" method="post">
+                            <Button variant="light">Cerrar sesión</Button>
+                        </form>
+                    </div>
                 </div>
             )}
         </main>

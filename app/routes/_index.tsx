@@ -33,7 +33,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
     const { userId } = useLoaderData<typeof loader>();
-    console.log(userId);
 
     return (
         <main className="bg-[url(https://utfs.io/f/82943412-5579-4174-86b4-2440dc88cf07-oz9zf.svg)] bg-auto">
@@ -47,8 +46,8 @@ export default function Index() {
                 </p>
                 <div className="flex gap-4 mt-4">
                     {userId === null ? (
-                        <Button>
-                            <NavLink to={"/login"}>
+                        <Button variant="dark_nopad">
+                            <NavLink to={"/login"} className="px-4 py-2">
                                 <span className="flex gap-2">
                                     Acceder
                                     <ArrowRight />
@@ -56,8 +55,8 @@ export default function Index() {
                             </NavLink>
                         </Button>
                     ) : (
-                        <Button>
-                            <NavLink to={"/dashboard"}>
+                        <Button variant="dark_nopad">
+                            <NavLink to={"/dashboard"} className="px-4 py-2">
                                 <span className="flex gap-2">
                                     <ArrowLeft />
                                     Volver a Dashboard
