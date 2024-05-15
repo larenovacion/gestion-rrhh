@@ -13,10 +13,12 @@ import {
     useLoaderData,
 } from "@remix-run/react";
 import { Button } from "~/components/ui/buttons";
-import { Edit, NewPerson, Trash } from "~/components/ui/svgs";
+import { Edit, NewPerson, Trash, Search } from "~/components/ui/svgs";
 import { Td, Th } from "~/components/ui/table";
 import { Suspense } from "react";
 import { NominaSkeleton } from "~/components/ui/skeletons";
+import { Input } from "~/components/ui/inputs";
+import { Label } from "~/components/ui/label";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Dashboard | Nómina" }];
@@ -72,7 +74,7 @@ export default function NominaPage() {
                     <h2 className="text-3xl text-zinc-900 w-full font-bold pb-4 drop-shadow-sm">
                         Nómina de empleados
                     </h2>
-                    <div className="flex flex-row gap-4 pb-6">
+                    <div className="flex flex-row justify-between pb-6">
                         <Button variant="dark_nopad">
                             <NavLink
                                 to={"/dashboard/new"}
@@ -84,6 +86,14 @@ export default function NominaPage() {
                                 </span>
                             </NavLink>
                         </Button>
+                        <Form method="post" className="flex gap-3">
+                            <Input className="text-zinc-900 border-zinc-900" type="text" variant="filled" name="search" id="search" placeholder="Buscar" />
+                            <Button>
+                                <span>
+                                    <Search/>
+                                </span>
+                            </Button>
+                        </Form>
                     </div>
                     {nomina.length > 0 ? (
                         <>
@@ -186,7 +196,7 @@ export default function NominaPage() {
                                 No hay datos para mostrar 😕
                             </h3>
                             <p className="text-zinc-600">
-                                Añade empleados a la nómina.
+                                Añade empleados a la nómina o busca otro nombre
                             </p>
                         </>
                     )}

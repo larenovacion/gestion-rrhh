@@ -10,6 +10,7 @@ type InputProps = HTMLAttributes<HTMLInputElement> & {
     autoComplete?: string;
     checked?: boolean;
     value?: string;
+    placeholder?: string;
 };
 
 export const Input = ({ type, variant, ...props }: InputProps) => {
