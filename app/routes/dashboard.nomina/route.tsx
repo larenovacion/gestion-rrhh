@@ -196,7 +196,7 @@ export default function NominaPage() {
                                 No hay datos para mostrar 😕
                             </h3>
                             <p className="text-zinc-600">
-                                Añade empleados a la nómina o busca otro nombre
+                                Añade empleados a la nómina o busca otro nombre.
                             </p>
                         </>
                     )}
