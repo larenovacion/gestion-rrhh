@@ -20,8 +20,8 @@ export default function DashboardIndexPage() {
             <h2 className="text-3xl text-zinc-900 w-full font-bold pb-4 drop-shadow-sm">
                 Dashboard
             </h2>
-            <p className="text-violet-500 w-full text-lg font-medium drop-shadow-sm">
-                ¡Hola, {userName}!
+            <p className="text-zinc-600 w-full text-lg font-medium drop-shadow-sm">
+                ¡Hola, <span className="text-violet-500">{userName}</span>!
             </p>
             <div className="w-7/12 md:w-96 flex flex-col items-center justify-center h-full">
                 <LogoBlack className="opacity-15 w-1/2 h-1/2" />

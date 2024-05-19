@@ -110,7 +110,7 @@ export default function NuevoEmpleadoPage() {
     const dispError = actionData?.errors?.disp;
 
     return (
-        <div className="flex flex-col w-full px-4 h-[calc(100%_-_3.5rem)]">
+        <div className="flex flex-col w-full px-4 h-[calc(100%_-_3.5rem)] overflow-auto">
             <h2 className="text-3xl text-zinc-900 w-full font-bold pb-4 drop-shadow-sm">
                 Registro de empleados
             </h2>
@@ -351,11 +351,12 @@ export default function NuevoEmpleadoPage() {
                                 disabled={navigation.state === "submitting"}
                             >
                                 {navigation.state === "submitting" ? (
-                                    <LoaderDots />
+                                    <>
+                                        <LoaderDots /> Creando
+                                    </>
                                 ) : (
-                                    ""
+                                    "Crear"
                                 )}
-                                Crear
                             </Button>
                             <Button variant="delete">
                                 <NavLink to={"/dashboard/nomina"}>

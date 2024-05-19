@@ -25,7 +25,7 @@ export async function getNominaItems() {
     });
 }
 
-export async function searchNominaItems(query: string){
+export async function searchNominaItems(query: string) {
     return await prisma.personalData.findMany({
         select: {
             id: true,
@@ -46,10 +46,11 @@ export async function searchNominaItems(query: string){
                     disp: true,
                 },
             },
-        }, where: {
-            name: query
-        }
-    })
+        },
+        where: {
+            name: query,
+        },
+    });
 }
 
 export async function deleteItem(id: string) {

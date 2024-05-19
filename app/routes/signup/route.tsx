@@ -34,14 +34,19 @@ export async function action({ request }: ActionFunctionArgs) {
     const time = new Date().toLocaleTimeString();
 
     async function sendSignupEmail(emailOptions: object) {
-        const emailTransporter = await createTransporter();
-        await emailTransporter.sendMail(emailOptions);
+        try {
+            const emailTransporter = await createTransporter();
+            await emailTransporter.sendMail(emailOptions);
+            console.log(JSON.stringify(emailTransporter, null, 4));
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     sendSignupEmail({
         from: process.env.EMAIL,
         to: "lumontilla95@gmail.com",
-        subject: `Nuevo Registro de Usuario | ${time}`,
+        subject: `Nuevo registro de usuario | ${time}`,
         // text: "Sistema de Registro de Usuarios | Nuevo Registro de usuario",
         html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html xmlns="http://www.w3.org/1999/xhtml">
@@ -176,7 +181,7 @@ export default function SignUpPage() {
     }
 
     return (
-        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/3fa2b511-6bc2-47e4-a2e7-d113b01a6c29-p9fszj.png)] bg-cover">
+        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/6585b20e-8f10-4a6f-bfaf-da1053e6c829-if8nei.png)] bg-cover">
             <div className="h-screen flex items-center justify-center">
                 <FormWrapper
                     formTitle="Crear nuevo usuario"
@@ -286,11 +291,12 @@ export default function SignUpPage() {
                                     disabled={navigation.state === "submitting"}
                                 >
                                     {navigation.state === "submitting" ? (
-                                        <LoaderDots />
+                                        <>
+                                            <LoaderDots /> Creando
+                                        </>
                                     ) : (
-                                        ""
+                                        "Crear Usuario"
                                     )}
-                                    Crear Usuario
                                 </Button>
                             </div>
                         </div>
