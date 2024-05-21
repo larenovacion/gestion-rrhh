@@ -13,10 +13,12 @@ import {
     useLoaderData,
 } from "@remix-run/react";
 import { Button } from "~/components/ui/buttons";
-import { Edit, NewPerson, Trash } from "~/components/ui/svgs";
+import { Edit, NewPerson, Trash, Search, Filter } from "~/components/ui/svgs";
 import { Td, Th } from "~/components/ui/table";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { NominaSkeleton } from "~/components/ui/skeletons";
+import { Input } from "~/components/ui/inputs";
+import { Filters } from "~/components/filters";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Dashboard | Nómina" }];
@@ -24,16 +26,52 @@ export const meta: MetaFunction = () => {
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
+    const action = formData.get("action");
     const id = String(formData.get("id"));
 
-    await deleteItem(id);
+    if (action === "delete") {
+        await deleteItem(id);
 
-    return redirect("/dashboard/nomina");
+        return redirect("/dashboard/nomina");
+    }
 }
 
 // eslint-disable-next-line  @typescript-eslint/no-unused-vars
 export async function loader({ request }: LoaderFunctionArgs) {
-    const nomina = await getNominaItems();
+    let nomina = await getNominaItems();
+    const url = new URL(request.url);
+    const query = url.searchParams.get("search")?.toLowerCase() || "";
+    const studies = url.searchParams.get("studies") || "";
+    const cond = url.searchParams.get("cond") || "";
+    const area = url.searchParams.get("area") || "";
+
+    if (query) {
+        nomina = nomina.filter(
+            (item) =>
+                item.name.toLowerCase().includes(query) ||
+                item.DNI.toString().includes(query) ||
+                item.address.toLowerCase().includes(query) ||
+                item.tel.toString().includes(query) ||
+                item.workData?.studies_grade.toLowerCase().includes(query) ||
+                item.workData?.ant.toLowerCase().includes(query) ||
+                item.workData?.disp.toLowerCase().includes(query) ||
+                item.workData?.area.toLowerCase().includes(query) ||
+                item.workData?.studies.toLowerCase().includes(query) ||
+                item.workData?.cond.toLowerCase().includes(query)
+        );
+    }
+
+    if (studies) {
+        nomina = nomina.filter((item) => item.workData?.studies === studies);
+    }
+
+    if (cond) {
+        nomina = nomina.filter((item) => item.workData?.cond === cond);
+    }
+
+    if (area) {
+        nomina = nomina.filter((item) => item.workData?.area === area);
+    }
 
     return json({ nomina });
 }
@@ -64,30 +102,61 @@ type EmpleadoData = {
 
 export default function NominaPage() {
     const { nomina } = useLoaderData<typeof loader>();
+    const [visible, setVisible] = useState(false);
+
+    function toggleFilters() {
+        setVisible(!visible);
+    }
 
     return (
         <Suspense fallback={<NominaSkeleton />}>
             <Await resolve={nomina}>
-                <div className="flex flex-col w-full px-4 h-[calc(100%_-_3.5rem)]">
+                <div className="flex flex-col w-full px-2 md:px-4 h-[calc(100%_-_3.5rem)]">
                     <h2 className="text-3xl text-zinc-900 w-full font-bold pb-4 drop-shadow-sm">
                         Nómina de empleados
                     </h2>
-                    <div className="flex flex-row gap-4 pb-6">
-                        <Button variant="dark_nopad">
-                            <NavLink
-                                to={"/dashboard/new"}
-                                className="px-4 py-2"
-                            >
-                                <span className="flex gap-2">
-                                    <NewPerson />
-                                    Añadir empleado
-                                </span>
-                            </NavLink>
-                        </Button>
-                    </div>
-                    {nomina.length > 0 ? (
-                        <>
-                            <div className="text-gray-700 pb-4 w-[100%] max-h-[77vh] overflow-auto scrollbar-thin">
+                    <div className="flex flex-col gap-4 items-start h-[85vh]">
+                        <div className="w-full flex gap-2 items-start justify-between flex-col md:flex-row">
+                            <Button variant="dark_nopad">
+                                <NavLink
+                                    to={"/dashboard/new"}
+                                    className="px-4 py-2"
+                                >
+                                    <span className="flex gap-2">
+                                        <NewPerson />
+                                        Añadir empleado
+                                    </span>
+                                </NavLink>
+                            </Button>
+                            <div className="flex gap-2 ">
+                                <Form method="get" className="flex gap-2">
+                                    <div className="w-full">
+                                        <Input
+                                            className="text-zinc-900 border-zinc-900"
+                                            type="text"
+                                            variant="filled"
+                                            name="search"
+                                            id="search"
+                                            placeholder="Buscar"
+                                        />
+                                    </div>
+                                    <input
+                                        type="hidden"
+                                        name="action"
+                                        value="search"
+                                    />
+                                    <Button>
+                                        <Search />
+                                    </Button>
+                                </Form>
+                                <Button onClick={toggleFilters}>
+                                    <Filter />
+                                </Button>
+                            </div>
+                        </div>
+                        {visible && <Filters className="md:self-end" />}
+                        {nomina.length > 0 ? (
+                            <div className="text-gray-700 pb-2 w-[100%] max-h-full overflow-auto scrollbar-thin">
                                 <table className="text-sm text-nowrap">
                                     <thead>
                                         <tr>
@@ -159,6 +228,11 @@ export default function NominaPage() {
                                                     <Td>
                                                         <Form method="post">
                                                             <input
+                                                                type="hidden"
+                                                                name="action"
+                                                                value="delete"
+                                                            />
+                                                            <input
                                                                 type="text"
                                                                 value={
                                                                     empleado.id
@@ -179,17 +253,18 @@ export default function NominaPage() {
                                     </tbody>
                                 </table>
                             </div>
-                        </>
-                    ) : (
-                        <>
-                            <h3 className="text-2xl text-zinc-900 font-semibold">
-                                No hay datos para mostrar 😕
-                            </h3>
-                            <p className="text-zinc-600">
-                                Añade empleados a la nómina.
-                            </p>
-                        </>
-                    )}
+                        ) : (
+                            <>
+                                <h3 className="text-2xl text-zinc-900 font-semibold">
+                                    No hay datos para mostrar 😕
+                                </h3>
+                                <p className="text-zinc-600">
+                                    Añade empleados a la nómina o busca otro
+                                    nombre.
+                                </p>
+                            </>
+                        )}
+                    </div>
                 </div>
             </Await>
         </Suspense>

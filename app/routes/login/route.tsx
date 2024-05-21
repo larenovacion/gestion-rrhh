@@ -69,7 +69,7 @@ export default function LoginPage() {
     }
 
     return (
-        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/3fa2b511-6bc2-47e4-a2e7-d113b01a6c29-p9fszj.png)] bg-cover bg-no-repeat">
+        <main className="lg:grid grid-cols-2 sm:bg-[url(https://utfs.io/f/6585b20e-8f10-4a6f-bfaf-da1053e6c829-if8nei.png)] bg-cover bg-no-repeat">
             <div className="h-screen flex items-center justify-center">
                 <FormWrapper
                     formTitle="Inicio de sesión"
@@ -159,11 +159,12 @@ export default function LoginPage() {
                                     disabled={navigation.state === "submitting"}
                                 >
                                     {navigation.state === "submitting" ? (
-                                        <LoaderDots />
+                                        <>
+                                            <LoaderDots /> Iniciando
+                                        </>
                                     ) : (
-                                        ""
+                                        "Iniciar Sesión"
                                     )}
-                                    Iniciar Sesión
                                 </Button>
                             </div>
                         </div>

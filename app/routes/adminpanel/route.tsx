@@ -22,13 +22,6 @@ export async function action({ request }: ActionFunctionArgs) {
     const action = formData.get("action");
     const id = String(formData.get("user_id"));
     const email = String(formData.get("user_email"));
-
-    if (action === "delete") {
-        await deleteUser(id);
-
-        return redirect("/adminpanel");
-    }
-
     const user = await getUser(id);
     const permits = Boolean(!user?.permits);
 
@@ -41,14 +34,19 @@ export async function action({ request }: ActionFunctionArgs) {
         await emailTransporter.sendMail(emailOptions);
     }
 
-    sendSignupEmail({
-        from: process.env.EMAIL,
-        to: email,
-        subject: "Sistema de Gestión de Recursos Humanos ",
-        text: "Su usuario ha sido dado de alta exitosamente. Recargue la aplicación.",
-    }).catch(console.error);
+    if (action === "delete") {
+        await deleteUser(id);
 
-    return await updatePermits({ id, permits });
+        return redirect("/adminpanel");
+    } else if (action === "permits") {
+        sendSignupEmail({
+            from: process.env.EMAIL,
+            to: email,
+            subject: "Sistema de Gestión de Recursos Humanos ",
+            text: "Su usuario ha sido dado de alta exitosamente. Recargue la aplicación.",
+        }).catch(console.error);
+        return await updatePermits({ id, permits });
+    }
 }
 
 // eslint-disable-next-line  @typescript-eslint/no-unused-vars
