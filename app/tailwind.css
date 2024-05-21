@@ -1,3 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.spinner_S1WN {
+    animation: spinner_MGfb 0.8s linear infinite;
+    animation-delay: -0.8s;
+}
+.spinner_Km9P {
+    animation-delay: -0.65s;
+}
+.spinner_JApP {
+    animation-delay: -0.5s;
+}
+@keyframes spinner_MGfb {
+    93.75%,
+    100% {
+        opacity: 0.2;
+    }
+}

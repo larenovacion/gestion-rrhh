@@ -9,10 +9,11 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(cuid())
-  name     String
-  email    String    @unique
-  password Password?
+  id          String    @id @default(cuid())
+  name        String
+  email       String    @unique
+  password    Password?
+  permits     Boolean   @default(false)
 }
 
 model Password {
@@ -22,24 +23,36 @@ model Password {
 }
 
 model PersonalData {
-  id 		String    @id @default(cuid())
-  name 		String
-  DNI 		String
-  birth 	DateTime
-  kids 		Int
-  address 	String
-  tel 		String
-  obvs 		String
-  workData WorkData?
+  id 		      String    @id @default(cuid())
+  name 		    String
+  DNI 		    String
+  birth 	    DateTime
+  kids 		    Int
+  address 	  String
+  tel 		    String
+  obvs 		    String
+  workData    WorkData?
 }
 
 model WorkData {
-  personalId String @unique
-  personalData PersonalData? @relation(fields: [personalId], references: [id])
-  ant 		String
-  cond 		String
-  studies 	String
-  area 		String
-  a_cargo 	String
-  disp 		String
+  personalId      String          @unique
+  personalData    PersonalData?   @relation(fields: [personalId], references: [id])
+  ant 		        String
+  cond 		        String
+  studies 	      String
+  studies_grade   String
+  area 		        String
+  disp 		        String
+}
+
+model Admin {
+  id            String  @id @default(cuid())
+  admin_name    String  @unique
+  password      AdminPassword?
+}
+
+model AdminPassword {
+  hash      String
+  adminId   String    @unique
+  admin     Admin?     @relation(fields: [adminId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
