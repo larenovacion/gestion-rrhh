@@ -34,6 +34,14 @@ export function Filters(props: FiltersProps) {
                 method="get"
                 className="text-zinc-400 flex flex-col md:flex-row gap-2 text-sm"
             >
+                {(values.area !== "" ||
+                    values.cond !== "" ||
+                    values.studies !== "") && (
+                    <Button variant="delete" onClick={handleClear}>
+                        Limpiar Filtros
+                    </Button>
+                )}
+
                 <div className="flex flex-col gap-2">
                     <Label htmlFor="studies" hidden>
                         Estudios
@@ -136,13 +144,6 @@ export function Filters(props: FiltersProps) {
                         <option value="Galpon">Galpón</option>
                     </select>
                 </div>
-                {(values.area !== "" ||
-                    values.cond !== "" ||
-                    values.studies !== "") && (
-                    <Button variant="delete" onClick={handleClear}>
-                        Limpiar Filtros
-                    </Button>
-                )}
             </Form>
         </div>
     );

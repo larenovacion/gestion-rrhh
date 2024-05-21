@@ -45,8 +45,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
     const cond = url.searchParams.get("cond") || "";
     const area = url.searchParams.get("area") || "";
 
-    console.log(url.searchParams.keys());
-
     if (query) {
         nomina = nomina.filter(
             (item) =>

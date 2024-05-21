@@ -7,7 +7,6 @@ import nodemailer from "nodemailer";
 dotenv.config();
 const EMAIL = process.env.EMAIL;
 const PASS = process.env.APP_PASS;
-console.log(PASS);
 
 export async function userExists(email: User["email"]) {
     const user = await prisma.user.findUnique({
