@@ -37,7 +37,7 @@ model PersonalData {
 model WorkData {
   personalId      String          @unique
   personalData    PersonalData?   @relation(fields: [personalId], references: [id])
-  ant 		        String
+  ant 		        DateTime
   cond 		        String
   studies 	      String
   studies_grade   String

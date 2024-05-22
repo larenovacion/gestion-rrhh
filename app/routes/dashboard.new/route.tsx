@@ -26,7 +26,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const tel = String(formData.get("tel"));
     const address = String(formData.get("address"));
     const obvs = String(formData.get("obvs"));
-    const ant = String(formData.get("ant"));
+    const ant = new Date(String(formData.get("ant")));
     const studies = String(formData.get("studies"));
     const studies_grade = String(formData.get("studies_grade"));
     const cond = String(formData.get("cond"));
@@ -212,7 +212,7 @@ export default function NuevoEmpleadoPage() {
                             </Label>
                             <Input
                                 variant="filled"
-                                type="text"
+                                type="date"
                                 name="ant"
                                 id="ant"
                             />

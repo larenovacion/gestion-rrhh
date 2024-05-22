@@ -39,7 +39,7 @@ async function main() {
             obvs: "un capo",
             workData: {
                 create: {
-                    ant: "Marzo de 2024",
+                    ant: new Date("2022-05-05"),
                     cond: "Beca",
                     studies: "Secundario Completo",
                     studies_grade: "Ingeniero de Software",

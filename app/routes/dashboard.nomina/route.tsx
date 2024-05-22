@@ -53,7 +53,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
                 item.address.toLowerCase().includes(query) ||
                 item.tel.toString().includes(query) ||
                 item.workData?.studies_grade.toLowerCase().includes(query) ||
-                item.workData?.ant.toLowerCase().includes(query) ||
                 item.workData?.disp.toLowerCase().includes(query) ||
                 item.workData?.area.toLowerCase().includes(query) ||
                 item.workData?.studies.toLowerCase().includes(query) ||
@@ -81,6 +80,45 @@ function formateDate(dateString: Date) {
     return date.toLocaleDateString();
 }
 
+function calculateAnt(dateString: Date) {
+    const ant = new Date(dateString);
+    const current = new Date();
+
+    function toYearsAndMonths(diff: number): { years: number; months: number } {
+        const msToDay = 1000 * 60 * 60 * 24;
+        const msToYear = msToDay * 365.25;
+        const msToMonth = msToDay * 30.44;
+
+        const years = Math.floor(diff / msToYear);
+
+        diff %= msToYear;
+
+        const months = Math.floor(diff / msToMonth);
+
+        return { years, months };
+    }
+
+    const diffMs = Number(current) - Number(ant);
+    const { years, months } = toYearsAndMonths(diffMs);
+
+    if (years > 0 && months == 0) {
+        return years == 1 ? `${years} año` : `${years} años`;
+    }
+
+    if (years == 0 && months > 0) {
+        return months == 1 ? `${months} mes` : `${months} meses`;
+    }
+
+    if (years > 0 && months > 0) {
+        if (years == 1 && months == 1) {
+            return `${years} año y ${months} mes`;
+        } else if (years == 1 && months > 1) {
+            return `${years} año y ${months} meses`;
+        }
+        return `${years} años y ${months} meses`;
+    }
+}
+
 type EmpleadoData = {
     id: string;
     name: string;
@@ -91,7 +129,7 @@ type EmpleadoData = {
     tel: string;
     obvs: string;
     workData: {
-        ant: string;
+        ant: Date;
         cond: string;
         studies: string;
         studies_grade: string;
@@ -193,7 +231,10 @@ export default function NominaPage() {
                                                     <Td>{empleado.address}</Td>
                                                     <Td>{empleado.obvs}</Td>
                                                     <Td>
-                                                        {empleado.workData.ant}
+                                                        {calculateAnt(
+                                                            empleado.workData
+                                                                .ant
+                                                        )}
                                                     </Td>
                                                     <Td>
                                                         {

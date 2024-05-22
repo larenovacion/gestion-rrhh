@@ -33,7 +33,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const tel = String(formData.get("tel"));
     const address = String(formData.get("address"));
     const obvs = String(formData.get("obvs"));
-    const ant = String(formData.get("ant"));
+    const ant = new Date(String(formData.get("ant")));
     const studies = String(formData.get("studies"));
     const studies_grade = String(formData.get("studies_grade"));
     const cond = String(formData.get("cond"));
@@ -115,7 +115,7 @@ interface LoaderData {
         tel: string;
         obvs: string;
         workData: {
-            ant: string;
+            ant: Date;
             cond: string;
             studies: string;
             area: string;
@@ -267,10 +267,12 @@ export default function EditEmpleadoPage() {
                             </Label>
                             <Input
                                 variant="filled"
-                                type="text"
+                                type="date"
                                 name="ant"
                                 id="ant"
-                                defaultValue={empleado.workData.ant}
+                                defaultValue={formateDate(
+                                    empleado.workData.ant
+                                )}
                             />
                         </div>
 
@@ -407,7 +409,7 @@ export default function EditEmpleadoPage() {
                             >
                                 {navigation.state === "submitting" ? (
                                     <>
-                                        <LoaderDots /> Actializando
+                                        <LoaderDots /> Actualizando
                                     </>
                                 ) : (
                                     "Actualizar"

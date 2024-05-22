@@ -6,7 +6,7 @@ export async function validate(
     address: string,
     tel: string,
     obvs: string,
-    ant: string,
+    ant: Date,
     cond: string,
     studies: string,
     studies_grade: string,
