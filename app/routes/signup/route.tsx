@@ -32,12 +32,18 @@ export async function action({ request }: ActionFunctionArgs) {
 
     const user = await createUser(name, email, password);
     const time = new Date().toLocaleTimeString();
+    const date = new Date().toLocaleDateString();
 
-    async function sendSignupEmail(emailOptions: object) {
+    async function sendSignupEmail(emailOptions: {
+        from: string | undefined;
+        to: string;
+        subject: string;
+        html: string;
+    }) {
         try {
             const emailTransporter = await createTransporter();
             await emailTransporter.sendMail(emailOptions);
-            console.log(JSON.stringify(emailTransporter, null, 4));
+            console.log(`Signup email successfully sent to ${emailOptions.to}`);
         } catch (error) {
             console.error(error);
         }
@@ -46,7 +52,7 @@ export async function action({ request }: ActionFunctionArgs) {
     sendSignupEmail({
         from: process.env.EMAIL,
         to: "lumontilla95@gmail.com",
-        subject: `Nuevo registro de usuario | ${time}`,
+        subject: `Nuevo registro de usuario | ${date} | ${time}`,
         // text: "Sistema de Registro de Usuarios | Nuevo Registro de usuario",
         html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html xmlns="http://www.w3.org/1999/xhtml">
@@ -112,7 +118,6 @@ export async function action({ request }: ActionFunctionArgs) {
                                                     ><img
                                                         src="https://utfs.io/f/cb1b9a82-48f4-43ab-9ca4-1b9ea5d3b5e7-bmsxgp.png"
                                                         width="180"
-                                                        alt="La Renovación logo"
                                                         title="Logo"
                                                 /></a>
                                             </td>
