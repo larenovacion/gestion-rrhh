@@ -33,9 +33,9 @@ export async function action({ request }: ActionFunctionArgs) {
     const user = await createUser(name, email, password);
 
     try {
-        sendSignupEmail(emailOptions);
+        await sendSignupEmail(emailOptions);
     } catch (error) {
-        console.error;
+        console.error(error);
     }
 
     return redirect("/", {
