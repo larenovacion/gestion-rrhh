@@ -25,8 +25,6 @@ export async function action({ request }: ActionFunctionArgs) {
     const user = await getUser(id);
     const permits = Boolean(!user?.permits);
 
-    console.log("from: ", process.env.EMAIL, "to: ", email);
-
     if (!user) {
         throw new Error("User doesn't exists");
     }
@@ -42,7 +40,12 @@ export async function action({ request }: ActionFunctionArgs) {
             subject: "Sistema de Gestión de Recursos Humanos",
             text: "Su usuario ha sido dado de alta exitosamente. Recargue la aplicación.",
         };
-        sendSignupEmail(emailOptions).catch(console.error);
+        try {
+            await sendSignupEmail(emailOptions);
+        } catch (error) {
+            console.error("Failed to send email", error);
+            return json({ errors: "Failed to send signup email" }, 500);
+        }
         return await updatePermits({ id, permits });
     }
 }
