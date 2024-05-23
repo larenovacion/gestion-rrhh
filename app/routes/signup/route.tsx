@@ -7,13 +7,14 @@ import {
 } from "@remix-run/react";
 import { validate } from "./validate";
 import { authCookie } from "~/auth";
-import { createUser, sendSignupEmail } from "./queries";
+import { createUser } from "./queries";
 import { FormWrapper } from "~/components/ui/form-wrapper";
 import { LogoRounded } from "~/components/ui/logo-rounded";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
 import { useState } from "react";
 import { ClosedEye, LoaderDots, OpenEye } from "~/components/ui/svgs";
+import { sendSignupEmail } from "~/utils";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Crear Usuario" }];
@@ -32,12 +33,10 @@ export async function action({ request }: ActionFunctionArgs) {
 
     const user = await createUser(name, email, password);
 
-    const time = new Date().toLocaleTimeString();
-    const date = new Date().toLocaleDateString();
     const emailOptions = {
         from: process.env.EMAIL,
         to: "lumontilla95@gmail.com",
-        subject: `Nuevo registro de usuario | ${date} | ${time}`,
+        subject: `Nuevo registro de usuario`,
         // text: "Sistema de Registro de Usuarios | Nuevo Registro de usuario",
         html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html xmlns="http://www.w3.org/1999/xhtml">

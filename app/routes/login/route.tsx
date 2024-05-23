@@ -30,7 +30,6 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     const userId = await login(email, password);
-    console.log(userId);
 
     if (!userId) {
         return json(
