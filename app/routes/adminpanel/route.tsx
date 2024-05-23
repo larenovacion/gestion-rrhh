@@ -11,7 +11,7 @@ import { Form, useLoaderData, useNavigation } from "@remix-run/react";
 import { User } from "@prisma/client";
 import { Button } from "~/components/ui/buttons";
 import { Trash } from "~/components/ui/svgs";
-import { createTransporter } from "../signup/queries";
+import { sendSignupEmail } from "../signup/queries";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Admin Panel" }];
@@ -29,22 +29,18 @@ export async function action({ request }: ActionFunctionArgs) {
         throw new Error("User doesn't exists");
     }
 
-    async function sendSignupEmail(emailOptions: object) {
-        const emailTransporter = await createTransporter();
-        await emailTransporter.sendMail(emailOptions);
-    }
-
     if (action === "delete") {
         await deleteUser(id);
 
         return redirect("/adminpanel");
     } else if (action === "permits") {
-        sendSignupEmail({
+        const emailOptions = {
             from: process.env.EMAIL,
             to: email,
             subject: "Sistema de Gestión de Recursos Humanos ",
             text: "Su usuario ha sido dado de alta exitosamente. Recargue la aplicación.",
-        }).catch(console.error);
+        };
+        sendSignupEmail(emailOptions).catch(console.error);
         return await updatePermits({ id, permits });
     }
 }

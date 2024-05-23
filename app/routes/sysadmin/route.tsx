@@ -30,7 +30,6 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     const adminId = await admin_login(sys_user, password);
-    console.log(adminId);
 
     if (!adminId) {
         return json(
