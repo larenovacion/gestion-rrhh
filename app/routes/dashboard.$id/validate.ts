@@ -51,6 +51,10 @@ export async function validate(
         errors.address = "Ingrese un domicilio";
     }
 
+    if (!studies_grade) {
+        errors.studies_grade = "Ingrese un perfil";
+    }
+
     if (!tel) {
         errors.tel = "Ingrese un número de teléfono";
     }

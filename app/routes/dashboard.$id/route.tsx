@@ -118,6 +118,7 @@ interface LoaderData {
             ant: Date;
             cond: string;
             studies: string;
+            studies_grade: string;
             area: string;
             disp: string;
         };
@@ -319,7 +320,8 @@ export default function EditEmpleadoPage() {
                                 type="text"
                                 variant="filled"
                                 id="studies_grade"
-                                name="studies_tgrade"
+                                name="studies_grade"
+                                defaultValue={empleado.workData.studies_grade}
                             />
                         </div>
 
@@ -368,8 +370,8 @@ export default function EditEmpleadoPage() {
                                 <option value="Administración">
                                     Administración
                                 </option>
-                                <option value="Formadores Deportivos">
-                                    Formadores Deportivos
+                                <option value="Desarrollo Estratégico de Políticas Públicas">
+                                    Desarrollo Estratégico de Políticas Públicas
                                 </option>
                                 <option value="Comunicación">
                                     Comunicación
