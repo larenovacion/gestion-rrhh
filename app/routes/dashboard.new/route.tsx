@@ -135,7 +135,7 @@ export default function NuevoEmpleadoPage() {
 
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="DNI" error={DNIError}>
-                                DNI
+                                DNI, sin puntos
                             </Label>
                             <Input
                                 variant="filled"
@@ -256,7 +256,7 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="studies_grade">Título</Label>
+                            <Label htmlFor="studies_grade">Perfil</Label>
                             <Input
                                 variant="filled"
                                 type="text"

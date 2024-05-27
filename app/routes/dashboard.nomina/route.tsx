@@ -204,13 +204,13 @@ export default function NominaPage() {
                                             <Th>Hijos</Th>
                                             <Th>Telefono</Th>
                                             <Th>Domicilio</Th>
-                                            <Th>Observaciones</Th>
                                             <Th>Antiguedad</Th>
                                             <Th>Estudios</Th>
-                                            <Th>Título</Th>
+                                            <Th>Perfil</Th>
                                             <Th>Condicion</Th>
                                             <Th>Area</Th>
                                             <Th>Disp. horaria</Th>
+                                            <Th>Observaciones</Th>
                                             <Th></Th>
                                             <Th></Th>
                                         </tr>
@@ -226,10 +226,9 @@ export default function NominaPage() {
                                                             empleado.birth
                                                         )}
                                                     </Td>
-                                                    <Td>{empleado.kids}</Td>
+                                                    <Td>{empleado.kids > 0 ? empleado.kids : "No tiene"}</Td>
                                                     <Td>{empleado.tel}</Td>
                                                     <Td>{empleado.address}</Td>
-                                                    <Td>{empleado.obvs}</Td>
                                                     <Td>
                                                         {calculateAnt(
                                                             empleado.workData
@@ -257,6 +256,7 @@ export default function NominaPage() {
                                                     <Td>
                                                         {empleado.workData.disp}
                                                     </Td>
+                                                    <Td>{empleado.obvs}</Td>
                                                     <Td>
                                                         <Button variant="light_nopad">
                                                             <NavLink
