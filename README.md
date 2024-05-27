@@ -9,7 +9,7 @@
 
 ---
 
-### Documentacion de Usuario
+## Documentacion de Usuario
 
 ---
 
@@ -86,11 +86,121 @@ Hemos llegado al final de la documentación. Si tienes dudas o encuentras algún
 
 ---
 
-### Documentacion de mantenimiento
+## Documentacion de mantenimiento
 
----
+### Stack de tecnologías:
 
-#### Administradores
+-   Framework: [Remix](https://remix.run/)
+-   Development DB: [Neon](https://neon.tech/)
+-   Production DB: [Vercel Postgres](https://vercel.com/storage/postgres)
+-   DB ORM: [Prisma](https://www.prisma.io/)
+-   PaaS: [Vercel](https://vercel.com/)
+-   Email Notification System: [Nodemailer](https://www.npmjs.com/package/nodemailer) + [Google App Password](https://support.google.com/accounts/answer/185833?hl=en)
+
+### Folder structure
+
+![Folder structure](https://utfs.io/f/beb85d7a-8112-4df2-a056-cbf9c1dbafb9-rwao8c.png)
+
+Usamos la estructura de [conventional route folders](https://remix.run/docs/en/main/discussion/routes#conventional-route-folders) de Remix donde el routing está determinado por cada carpeta que contenga un archivo `route.tsx` . Las carpetas también contienen archivos que conciernen a esa ruta como `validate.ts` o `queries.ts` .
+
+### ORM
+
+En el directorio raíz tenemos la carpeta prisma que contiene todo lo concerniente al manejo de la ORM.
+
+En el archivo `schema.prisma` vamos a definir nuestros schemas correspondientes a las tablas que vamos a usar.
+
+Siempre que modifiquemos los schemas necesitamos ejecutar el script `npx prisma generate` para generar los tipos de nuestra base de datos. Es recomendable reiniciar el server de desarrollo y el server de typescript de VSCode.
+
+En el directorio `app` tenemos dos archivos importantes que debemos definir.
+
+```ts
+//singleton.server.ts
+
+export const singleton = <Value>(
+    name: string,
+    valueFactory: () => Value
+): Value => {
+    const g = global as unknown as { __singletons: Record<string, unknown> };
+    g.__singletons ??= {};
+    g.__singletons[name] ??= valueFactory();
+    return g.__singletons[name] as Value;
+};
+```
+
+```ts
+//db.server.ts
+
+import { PrismaClient } from "@prisma/client";
+import { singleton } from "./singleton.server";
+
+const prisma = singleton("prisma", () => new PrismaClient());
+try {
+    prisma.$connect;
+} catch (error) {
+    throw new Error("No se pudo cestablecer conección con base de datos.");
+}
+
+export { prisma };
+```
+
+_Estos middlewares se encargan de administrar la conexión de nuestra base de datos_.
+
+Una vez generados los tipos de la base de datos, pusheamos los schemas con el script `npx prisma db push` .
+
+Para seedear la base de datos ejecutamos una función en un archivo mediante [tsx](https://www.npmjs.com/package/tsx) con el script `npx tsx {file.ts}` . Vamos a usar este script para seedear nuestro Admin a la base de datos desde un archivo que debemos añadir en nuestro `.gitignore` .
+
+Finalmente ejecutando `npx prisma studio` ejecutamos un cliente que conecta con nuestra base de datos para administrar las tablas y sus valores.
+
+### Deployment
+
+Desde Vercel integramos la cuenta de github de La Renovación y seguimos las instrucciones. Vercel normalmente completa la build del proyecto incluso si faltan variables de entorno, sin embargo es recomendable definirlas antes de hacer deploy.
+
+Una vez deployeado, debemos vincular el proyecto a la base de datos de Vercel y cambiar la variable de entorno correspondiente a nuestra base de datos. Esta será nuestra base de datos de producción.
+
+Finalmente, debemos agregar un [cron job](https://vercel.com/docs/cron-jobs)
+
+```ts
+//app/api/cron.ts
+
+import { VercelRequest, VercelResponse } from "@vercel/node";
+
+export default async function loader(
+    request: VercelRequest,
+    response: VercelResponse
+) {
+    const authHeader = request.headers["authorization"];
+
+    if (authHeader && authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+        return response.status(401).end("Unauthorized");
+    }
+    return response.status(200).send("Hello Cron!");
+}
+```
+
+_Debemos generar el valor de CRON_SECRET nosotros mismos._
+
+Y un archivo en nuestro directorio raíz.
+
+```json
+//vercel.json
+
+{
+    "crons": [
+        {
+            "path": "/api/cron",
+            "schedule": "0 8 * * *"
+        }
+    ]
+}
+```
+
+### Notificaciones email
+
+El sistema envía emails mediante Nodemailer usando una contraseña de aplicaciones de google para enviar mails automáticamente desde el email de IT de La Renovación. La contraseña la obtenemos y la guardamos en nuestras variables de entorno.
+
+El cron job se encarga de "calentar" las funciones serverless para que no se vean afectadas por un "cold start" del servidor para prevenir el delay en el sistema de notificaciones.
+
+### Administradores
 
 | Nombre           | Email                       | Número de teléfono |
 | ---------------- | --------------------------- | ------------------ |
