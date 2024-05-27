@@ -231,6 +231,9 @@ export default function NuevoEmpleadoPage() {
                                 <option value="" disabled>
                                     Selecciona una opción
                                 </option>
+                                <option value="Primario Incompleto">
+                                    Primario Incompleto
+                                </option>
                                 <option value="Primario Completo">
                                     Primario Completo
                                 </option>

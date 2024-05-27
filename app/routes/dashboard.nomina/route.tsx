@@ -19,6 +19,7 @@ import { Suspense, useState } from "react";
 import { NominaSkeleton } from "~/components/ui/skeletons";
 import { Input } from "~/components/ui/inputs";
 import { Filters } from "~/components/filters";
+import { Modal } from "~/components/ui/modal";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Dashboard | Nómina" }];
@@ -141,15 +142,21 @@ type EmpleadoData = {
 export default function NominaPage() {
     const { nomina } = useLoaderData<typeof loader>();
     const [visible, setVisible] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [targetId, setTargetId] = useState<string>("");
 
     function toggleFilters() {
         setVisible(!visible);
     }
 
+    function toggleModal() {
+        setShowModal(!showModal);
+    }
+
     return (
         <Suspense fallback={<NominaSkeleton />}>
             <Await resolve={nomina}>
-                <div className="flex flex-col w-full px-2 md:px-4 h-[calc(100%_-_3.5rem)]">
+                <div className="flex flex-col w-full px-2 md:px-4 h-[calc(100%_-_3.5rem)] relative">
                     <h2 className="text-3xl text-zinc-900 w-full font-bold pb-4 drop-shadow-sm">
                         Nómina de empleados
                     </h2>
@@ -226,7 +233,11 @@ export default function NominaPage() {
                                                             empleado.birth
                                                         )}
                                                     </Td>
-                                                    <Td>{empleado.kids > 0 ? empleado.kids : "No tiene"}</Td>
+                                                    <Td>
+                                                        {empleado.kids > 0
+                                                            ? empleado.kids
+                                                            : "No tiene"}
+                                                    </Td>
                                                     <Td>{empleado.tel}</Td>
                                                     <Td>{empleado.address}</Td>
                                                     <Td>
@@ -268,32 +279,29 @@ export default function NominaPage() {
                                                         </Button>
                                                     </Td>
                                                     <Td>
-                                                        <Form method="post">
-                                                            <input
-                                                                type="hidden"
-                                                                name="action"
-                                                                value="delete"
-                                                            />
-                                                            <input
-                                                                type="text"
-                                                                value={
+                                                        <Button
+                                                            variant="delete"
+                                                            onClick={() => {
+                                                                setTargetId(
                                                                     empleado.id
-                                                                }
-                                                                id="id"
-                                                                name="id"
-                                                                hidden
-                                                                readOnly
-                                                            />
-                                                            <Button variant="delete">
-                                                                <Trash />
-                                                            </Button>
-                                                        </Form>
+                                                                );
+
+                                                                toggleModal();
+                                                            }}
+                                                        >
+                                                            <Trash />
+                                                        </Button>
                                                     </Td>
                                                 </tr>
                                             )
                                         )}
                                     </tbody>
                                 </table>
+                                <Modal
+                                    showModal={showModal}
+                                    targetId={targetId}
+                                    toggleModal={toggleModal}
+                                />
                             </div>
                         ) : (
                             <>

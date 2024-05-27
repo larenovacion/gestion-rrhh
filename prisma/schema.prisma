@@ -25,7 +25,7 @@ model Password {
 model PersonalData {
   id 		      String    @id @default(cuid())
   name 		    String
-  DNI 		    String
+  DNI 		    String    //make unique in production
   birth 	    DateTime
   kids 		    Int
   address 	  String
