@@ -4,8 +4,8 @@
 
 ## Documentación:
 
--   [Documentación de usuario](#doc-usuario)
--   [Documentación de mantenimiento](#doc-mantenimiento)
+-   [Documentación de usuario](#documentacion-de-usuario)
+-   [Documentación de mantenimiento](#documentacion-de-mantenimiento)
 
 ---
 
@@ -23,7 +23,7 @@ En la portada viste la pantalla de bienvenida de la aplicación. Al hacer click 
 
 Vas a iniciar sesión con las `credenciales` que se te otorguen.
 
-> Si no tienes credenciales ponte en contacto con los [administradores](#admins-info)
+> Si no tienes credenciales ponte en contacto con los [administradores](#administradores)
 
 Una vez inicies sesión, vas a ver la pantalla principal del `Dashboard`:
 
@@ -82,7 +82,7 @@ Finalmente, si la nómina está vacía, ya sea porque no hay datos, hay un error
 
 ![No data](https://utfs.io/f/3e7238aa-31b3-4893-8ab9-b50048ceeda0-17k.png)
 
-Hemos llegado al final de la documentación. Si tienes dudas o encuentras algún error en el funcionamiento de la aplicación, contacta con los [administradores](#admins-info).
+Hemos llegado al final de la documentación. Si tienes dudas o encuentras algún error en el funcionamiento de la aplicación, contacta con los [administradores](#administradores).
 
 ---
 
@@ -90,8 +90,9 @@ Hemos llegado al final de la documentación. Si tienes dudas o encuentras algún
 
 ---
 
-[**Administradores**](#admins-info)
-|Nombre|Email|Número de teléfono|
-|---|---|---|
-|Ignacio Pantoja|pantojaignacio642@gmail.com|3804800454|
-|Luciano Montilla|lumontilla95@gmail.com|3804113325|
+#### [**Administradores**](#admins-info)
+
+| Nombre           | Email                       | Número de teléfono |
+| ---------------- | --------------------------- | ------------------ |
+| Ignacio Pantoja  | pantojaignacio642@gmail.com | 3804800454         |
+| Luciano Montilla | lumontilla95@gmail.com      | 3804113325         |
