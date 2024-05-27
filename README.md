@@ -9,7 +9,7 @@
 
 ---
 
-### [Documentación de Usuario](#doc-usuario)
+### Documentacion de Usuario
 
 ---
 
@@ -86,11 +86,11 @@ Hemos llegado al final de la documentación. Si tienes dudas o encuentras algún
 
 ---
 
-### [Documentación de mantenimiento](#doc-mantenimiento)
+### Documentacion de mantenimiento
 
 ---
 
-#### [**Administradores**](#admins-info)
+#### Administradores
 
 | Nombre           | Email                       | Número de teléfono |
 | ---------------- | --------------------------- | ------------------ |
