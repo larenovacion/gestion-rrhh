@@ -12,6 +12,8 @@ import { User } from "@prisma/client";
 import { Button } from "~/components/ui/buttons";
 import { Trash } from "~/components/ui/svgs";
 import { sendSignupEmail } from "~/utils";
+import { Modal } from "~/components/ui/modal";
+import { useState } from "react";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Admin Panel" }];
@@ -66,8 +68,15 @@ export default function AdminPanelPage() {
     const { users } = useLoaderData<typeof loader>();
     const navigation = useNavigation();
 
+    const [showModal, setShowModal] = useState(false);
+    const [targetId, setTargetId] = useState<string>("");
+
+    function toggleModal() {
+        setShowModal(!showModal);
+    }
+
     return (
-        <main className="h-screen bg-black text-white flex flex-col overflow-hidden">
+        <main className="h-screen bg-black text-white flex flex-col overflow-hidden relative">
             <div className="flex flex-col w-full pt-14 px-4">
                 <h1 className="text-3xl w-full font-bold pb-4 drop-shadow-sm">
                     Admin Panel
@@ -143,24 +152,16 @@ export default function AdminPanelPage() {
                                                 </Form>
                                             </td>
                                             <td className="text-zinc-100 border-solid border-2 border-zinc-900 p-3">
-                                                <Form method="post">
-                                                    <input
-                                                        type="hidden"
-                                                        name="action"
-                                                        value="delete"
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        id="user_id"
-                                                        name="user_id"
-                                                        value={user.id}
-                                                        hidden
-                                                        readOnly
-                                                    />
-                                                    <Button variant="delete">
-                                                        <Trash className=" h-5 transition-colors duration-200" />
-                                                    </Button>
-                                                </Form>
+                                                <Button
+                                                    variant="delete"
+                                                    onClick={() => {
+                                                        setTargetId(user.id);
+
+                                                        toggleModal();
+                                                    }}
+                                                >
+                                                    <Trash className=" h-5 transition-colors duration-200" />
+                                                </Button>
                                             </td>
                                         </tr>
                                     ))}
@@ -170,6 +171,12 @@ export default function AdminPanelPage() {
                     </div>
                 </section>
             </div>
+            <Modal
+                toggleModal={toggleModal}
+                showModal={showModal}
+                targetId={targetId}
+                name="user_id"
+            />
         </main>
     );
 }

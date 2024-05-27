@@ -20,7 +20,7 @@
 
 #### Mejoras:
 
--   [ ] Crear buscador en nómona
+-   [x] Crear buscador en nómona
 -   [x] Mejorar seguridad de las rutas con remix auth
 -   [ ] Migrar a cuentas de produccion (GitHub, Vercel, etc)
 -   [ ] Implementar zod y react-hook-form en verificación de formularios
@@ -34,6 +34,7 @@
 -   [x] Añadir sistema de notificaiones por mail para el manejo de permisos de usuario
 -   [x] Diseñar mail html
 -   [x] Solucionar bug de autenticación para usuario sin permisos
+-   [x] Añadir modal para borrar registros en la nómina
 
 ### WORKFLOW DE [PRISMA](https://www.prisma.io/):
 

@@ -5,10 +5,12 @@ export function Modal({
     showModal,
     targetId,
     toggleModal,
+    name,
 }: {
     showModal: boolean;
     targetId: string;
     toggleModal: () => void;
+    name: string;
 }) {
     return (
         <div
@@ -35,8 +37,8 @@ export function Modal({
                     <input
                         type="text"
                         value={targetId}
-                        id="id"
-                        name="id"
+                        id={name}
+                        name={name}
                         hidden
                         readOnly
                     />
