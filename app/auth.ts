@@ -13,7 +13,7 @@ export const authCookie = createCookie("auth", {
     sameSite: "lax",
     secrets: [secret],
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7, // 7 días
+    maxAge: 60 * 60 * 24 * 2, // 2 días
 });
 
 export async function getAuthFromRequest(

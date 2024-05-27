@@ -258,9 +258,10 @@ export default function NominaPage() {
                                                         {empleado.workData.disp}
                                                     </Td>
                                                     <Td>
-                                                        <Button variant="light">
+                                                        <Button variant="light_nopad">
                                                             <NavLink
                                                                 to={`/dashboard/${empleado.id}`}
+                                                                className="px-4 py-2"
                                                             >
                                                                 <Edit />
                                                             </NavLink>

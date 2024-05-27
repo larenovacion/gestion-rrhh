@@ -415,8 +415,11 @@ export default function EditEmpleadoPage() {
                                     "Actualizar"
                                 )}
                             </Button>
-                            <Button variant="delete">
-                                <NavLink to={"/dashboard/nomina"}>
+                            <Button variant="delete_nopad">
+                                <NavLink
+                                    to={"/dashboard/nomina"}
+                                    className="py-2 px-4"
+                                >
                                     Cancelar
                                 </NavLink>
                             </Button>

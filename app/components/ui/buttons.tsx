@@ -7,6 +7,7 @@ type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
         | "light"
         | "light_nopad"
         | "delete"
+        | "delete_nopad"
         | "icon";
     disabled?: boolean;
     className?: string;
@@ -28,6 +29,8 @@ const buttonVariants = cva(
                 light_nopad:
                     "bg-white text-zinc-800 hover:text-white hover:bg-violet-600 active:bg-violet-400",
                 delete: "bg-white text-zinc-800 hover:text-white hover:bg-red-400 active:bg-violet-400 py-2 px-4",
+                delete_nopad:
+                    "bg-white text-zinc-800 hover:text-white hover:bg-red-400 active:bg-violet-400",
                 icon: "bg-transparent text-zinc-800",
             },
         },
