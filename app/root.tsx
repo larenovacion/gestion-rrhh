@@ -12,6 +12,7 @@ import {
 import "./tailwind.css";
 import { getAuthFromRequest } from "./auth";
 import { LoaderFunctionArgs } from "@remix-run/node";
+import { SpeedInsights } from "@vercel/speed-insights/remix";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const auth = await getAuthFromRequest(request);
@@ -35,6 +36,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </head>
             <body className="bg-zinc-100 font-inter">
                 {children}
+                <SpeedInsights />
                 <ScrollRestoration />
                 <Scripts />
             </body>
