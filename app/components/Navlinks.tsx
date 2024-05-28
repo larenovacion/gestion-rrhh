@@ -52,7 +52,7 @@ export function NavLinksDesktop(props: NavLinksProps) {
             </NavLink>
             <Link
                 to={
-                    "https://github.com/uno-nueve/gestion-rrhh?tab=readme-ov-file#documentaci%C3%B3n"
+                    "https://github.com/larenovacion/gestion-rrhh?tab=readme-ov-file#sistema-de-gesti%C3%B3n-de-recursos-humanos"
                 }
                 target="_blanck"
                 className={

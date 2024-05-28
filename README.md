@@ -11,8 +11,6 @@
 
 ## Documentacion de Usuario
 
----
-
 Bienvenidx al Sistema de Gestión de Recursos Humanos de La Renovación.
 
 Te guiaremos por la aplicación para que conozcas su funcionamiento.
@@ -29,11 +27,15 @@ Una vez inicies sesión, vas a ver la pantalla principal del `Dashboard`:
 
 ![Dashboard](https://utfs.io/f/6f4799ed-012b-427c-8bf4-f699fc0e3ede-1f.png)
 
-A tu izquerda está la `barra de navegación`, si haces click en `Nómina` vas a navegar a la sección de manipulación de la base de datos.
+A tu izquerda está la `barra de navegación`, si hacés click en `Nómina` vas a navegar a la sección de manipulación de la base de datos.
 
 ![Nómina](https://utfs.io/f/feec1438-d8f7-421d-bd26-7c9b5810e27b-5h0gqz.png)
 
-Como podés ver, desde esta sección podrás: ver los datos de los empleados en una tabla, buscar datos concretos y filtrar la tabla usando filtros (verás más sobre esto más adelante) y añadir empleados a la nómina.
+Como podés ver, desde esta sección podrás:
+
+-   Ver los datos de los empleados en una tabla.
+-   Buscar datos concretos y filtrar la tabla usando filtros (verás más sobre esto más adelante).
+-   Añadir empleados a la nómina.
 
 Si hacemos click en `Añadir empleado` navegaremos al siguiente formulario:
 
@@ -43,14 +45,14 @@ Si hacemos click en `Añadir empleado` navegaremos al siguiente formulario:
 
 **Algunas recomendaciones:**
 
--   Cantidad de hijos siempre debe ser un número, si introducís 0, verás _No tiene_ en la nómina.
+-   Cantidad de hijos **siempre** debe ser un número, si introducís 0, verás _No tiene_ en la nómina.
 -   Antiguedad es la fecha de ingreso a La Renovación.
 -   Usá un formato adecuado y consistente para la disponibilidad horaria. Ejemplo: Mañana: 9 a 13, Tarde: 18 a 20. Esto es importante para el correcto funcionamiento del `buscador`.
 -   Todos los campos que tienen opciones predefinidas, son los valores que vas a usar para filtrar la nómina.
 
 > Una vez completes el formulario y hagas click en el botón Crear, volverás a la `Nómina`.
 
-En la tabla de la Nómina, si deslizaas a la derecha, verás unos botones al final:
+En la tabla de la Nómina, si deslizas a la derecha, verás unos botones al final:
 
 ![Acciones de tabla](https://utfs.io/f/47948795-6ad6-4793-ad2f-1af9edbbd929-1l.png)
 
@@ -60,7 +62,7 @@ Si haces click en editar, verás el formulario anterior con los datos del emplea
 
 ![Editar empleado](https://utfs.io/f/05816fac-2cac-47ae-8723-11184c063edf-1i.png)
 
-Si haces click en borrar, aparecerá el siguiente cuadro de diálogo para que confirmes la acción:
+En cambio, si haces click en borrar, aparecerá el siguiente cuadro de diálogo para que confirmes la acción:
 
 ![Borrar modal](https://utfs.io/f/31af8903-6350-4fe5-b798-0f4d20660af6-1k.png)
 
@@ -78,7 +80,7 @@ Al seleccionar una opción también aparecerá un botón para limpiar los filtro
 
 Al hacer click en el botón, la tabla volverá a la normalidad.
 
-Finalmente, si la nómina está vacía, ya sea porque no hay datos, hay un error con la conección con la base de datos o la busqueda no dió resultados verás la siguiente página:
+Finalmente, si la nómina está vacía, ya sea porque no hay datos, hay un error de conexión con la base de datos o la busqueda no dió resultados verás la siguiente página:
 
 ![No data](https://utfs.io/f/3e7238aa-31b3-4893-8ab9-b50048ceeda0-17k.png)
 
