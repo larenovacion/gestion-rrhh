@@ -7,7 +7,7 @@ import ws from "ws";
 
 dotenv.config();
 neonConfig.webSocketConstructor = ws;
-const connectionString = `${process.env.DATABASE_URL}`;
+const connectionString = `${process.env.POSTGRES_URL}`;
 
 const pool = new Pool({ connectionString });
 const adapter = new PrismaNeon(pool);
@@ -19,7 +19,7 @@ async function main() {
     const user = await prisma.user.create({
         data: {
             name: "Recursos Humanos",
-            email: "larenovacion@mail.com",
+            email: "it.larenovacion@gmail.com",
             password: {
                 create: {
                     hash: hashedPassword,
@@ -36,15 +36,15 @@ async function main() {
             kids: 0,
             address: "Barrio Facundo Quiroga",
             tel: "3804123456",
-            obvs: "un capo",
+            obvs: "---",
             workData: {
                 create: {
                     ant: new Date("2022-05-05"),
                     cond: "Beca",
                     studies: "Secundario Completo",
-                    studies_grade: "Ingeniero de Software",
+                    studies_grade: "Multimedia",
                     area: "Planificacion",
-                    disp: "Lunes, Miercoles y Viernes de 8 a 12",
+                    disp: "Mañana",
                 },
             },
         },
