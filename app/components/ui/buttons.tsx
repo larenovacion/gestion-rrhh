@@ -30,7 +30,7 @@ const buttonVariants = cva(
                     "bg-white text-zinc-800 hover:text-white hover:bg-violet-600 active:bg-violet-400",
                 delete: "bg-white text-zinc-800 hover:text-white hover:bg-red-400 active:bg-violet-400 py-2 px-4",
                 delete_nopad:
-                    "bg-white text-zinc-800 hover:text-white hover:bg-red-400 active:bg-violet-400",
+                    "bg-white text-zinc-800 hover:text-white hover:bg-red-400 active:bg-red-500",
                 icon: "bg-transparent text-zinc-800",
             },
         },
