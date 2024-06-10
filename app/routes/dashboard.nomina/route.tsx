@@ -11,9 +11,11 @@ import {
     MetaFunction,
     NavLink,
     useLoaderData,
+    useLocation,
+    useNavigate,
 } from "@remix-run/react";
 import { Button } from "~/components/ui/buttons";
-import { Edit, NewPerson, Trash, Search, Filter } from "~/components/ui/svgs";
+import { Edit, NewPerson, Trash, Search, Filter, Cancel } from "~/components/ui/svgs";
 import { Td, Th } from "~/components/ui/table";
 import { Suspense, useState } from "react";
 import { NominaSkeleton } from "~/components/ui/skeletons";
@@ -143,7 +145,9 @@ export default function NominaPage() {
     const { nomina } = useLoaderData<typeof loader>();
     const [visible, setVisible] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("")
     const [targetId, setTargetId] = useState<string>("");
+    const location = useLocation()
 
     function toggleFilters() {
         setVisible(!visible);
@@ -152,6 +156,12 @@ export default function NominaPage() {
     function toggleModal() {
         setShowModal(!showModal);
     }
+
+    function handleQuery() {
+        setSearchQuery("")
+    }
+
+
 
     return (
         <Suspense fallback={<NominaSkeleton />}>
@@ -176,6 +186,7 @@ export default function NominaPage() {
                                 </Button>
                                 <div className="flex gap-2 ">
                                     <Form method="get" className="flex gap-2">
+                                        {searchQuery !== location.search && <Button variant="delete_nopad" onClick={handlesQuery}><NavLink to={'/dashboard/nomina'} className="py-2 px-4"><Cancel /></NavLink></Button>}
                                         <div className="w-full">
                                             <Input
                                                 className="text-zinc-900 border-zinc-900"
@@ -184,7 +195,10 @@ export default function NominaPage() {
                                                 name="search"
                                                 id="search"
                                                 placeholder="Buscar"
+                                                value={searchQuery}
+                                                onChange={(e) => { setSearchQuery(e.target.value) }}
                                             />
+
                                         </div>
                                         <input
                                             type="hidden"

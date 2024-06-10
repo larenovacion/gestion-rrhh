@@ -373,8 +373,8 @@ export default function EditEmpleadoPage() {
                                 <option value="Administración">
                                     Administración
                                 </option>
-                                <option value="Desarrollo Estratégico de Políticas Públicas">
-                                    Desarrollo Estratégico de Políticas Públicas
+                                <option value="Formadores Deportivos">
+                                    Formadores Deportivos
                                 </option>
                                 <option value="Comunicación">
                                     Comunicación
