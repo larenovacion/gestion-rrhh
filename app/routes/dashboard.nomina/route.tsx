@@ -186,7 +186,7 @@ export default function NominaPage() {
                                 </Button>
                                 <div className="flex gap-2 ">
                                     <Form method="get" className="flex gap-2">
-                                        {searchQuery !== location.search && <Button variant="delete_nopad" onClick={handlesQuery}><NavLink to={'/dashboard/nomina'} className="py-2 px-4"><Cancel /></NavLink></Button>}
+                                        {searchQuery !== location.search && <Button variant="delete_nopad" onClick={handleQuery}><NavLink to={'/dashboard/nomina'} className="py-2 px-4"><Cancel /></NavLink></Button>}
                                         <div className="w-full">
                                             <Input
                                                 className="text-zinc-900 border-zinc-900"
