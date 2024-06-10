@@ -285,7 +285,7 @@ export default function NominaPage() {
                                                                     .disp
                                                             }
                                                         </Td>
-                                                        <Td>{empleado.obvs}</Td>
+                                                        <Td>{empleado.obvs ? empleado.obvs : "---"}</Td>
                                                         <Td>
                                                             <Button variant="light_nopad">
                                                                 <NavLink
