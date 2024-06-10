@@ -67,6 +67,9 @@ export async function validate(
         errors.studies = "Seleccione un nivel de estudios";
     }
 
+    if (!studies_grade) {
+        errors.studies_grade = "Ingrese Perfil"
+    }
     if (!area) {
         errors.area = "Seleccione un area";
     }

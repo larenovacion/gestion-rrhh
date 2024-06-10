@@ -10,7 +10,7 @@ import { createEmpleado } from "./queries";
 import { Button } from "~/components/ui/buttons";
 import { Input } from "~/components/ui/inputs";
 import { Label } from "~/components/ui/label";
-import { LoaderDots } from "~/components/ui/svgs";
+import { LoaderDots, Asterisk } from "~/components/ui/svgs";
 
 export const meta: MetaFunction = () => {
     return [{ title: "Añadir Empleado" }];
@@ -106,12 +106,13 @@ export default function NuevoEmpleadoPage() {
     const antError = actionData?.errors?.ant;
     const studiesError = actionData?.errors?.studies;
     const condError = actionData?.errors?.cond;
+    const gradeError = actionData?.errors?.studies_grade;
     const areaError = actionData?.errors?.area;
     const dispError = actionData?.errors?.disp;
 
     return (
         <div className="flex flex-col w-full px-4 h-[calc(100%_-_3.5rem)] overflow-auto">
-            <h2 className="text-3xl text-zinc-900 w-full font-bold pb-4 drop-shadow-sm">
+            <h2 className="text-3xl text-zinc-900 w-full font-bold pb-4 drop-shadow-sm mb-1">
                 Registro de empleados
             </h2>
 
@@ -122,9 +123,12 @@ export default function NuevoEmpleadoPage() {
                 <div className="flex flex-col w-full sm:w-auto sm:grid grid-cols-2 gap-4 sm:gap-10 pb-8 sm:pb-0">
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="name" error={nameError}>
-                                Nombre completo
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={nameError}>
+                                    Nombre completo
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -134,9 +138,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="DNI" error={DNIError}>
-                                DNI, sin puntos
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={DNIError}>
+                                    DNI, sin puntos
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -146,9 +153,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="birth" error={birthError}>
-                                Fecha de nacimiento
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={birthError}>
+                                    Fecha de Nacimiento
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="date"
@@ -158,9 +168,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="kids" error={kidsError}>
-                                Cantidad de hijos
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={kidsError}>
+                                    Cantidad de Hijos
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="number"
@@ -170,9 +183,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="tel" error={telError}>
-                                Teléfono
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={telError}>
+                                    Teléfono
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="tel"
@@ -182,9 +198,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="address" error={addressError}>
-                                Domicilio
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={addressError}>
+                                    Domicilio
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -207,9 +226,12 @@ export default function NuevoEmpleadoPage() {
 
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="ant" error={antError}>
-                                Antigüedad
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={antError}>
+                                    Antiguedad
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="date"
@@ -219,9 +241,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="studies" error={studiesError}>
-                                Estudios
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={studiesError}>
+                                    Nivel de Estudios
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <select
                                 defaultValue={""}
                                 name="studies"
@@ -259,7 +284,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="studies_grade">Perfil</Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={gradeError}>
+                                    Perfil
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="text"
@@ -269,9 +299,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="cond" error={condError}>
-                                Condición
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={condError}>
+                                    Condición
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <select
                                 defaultValue={""}
                                 name="cond"
@@ -298,9 +331,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="area" error={areaError}>
-                                Área
-                            </Label>
+                            <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={areaError}>
+                                    Área
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <select
                                 defaultValue={""}
                                 name="area"
@@ -314,8 +350,8 @@ export default function NuevoEmpleadoPage() {
                                 <option value="Administración">
                                     Administración
                                 </option>
-                                <option value="Desarrollo Estratégico de Políticas Públicas">
-                                    Desarrollo Estratégico de Políticas Públicas
+                                <option value="Formadores Deportivos">
+                                    Formadores Deportivos
                                 </option>
                                 <option value="Comunicación">
                                     Comunicación
@@ -338,9 +374,12 @@ export default function NuevoEmpleadoPage() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="disp" error={dispError}>
-                                Disponibilidad horaria
-                            </Label>
+                        <div className="flex gap-2 align-middle">
+                                <Label htmlFor="name" error={dispError}>
+                                    Disponibilidad Horaria
+                                </Label>
+                                <Asterisk />
+                            </div>
                             <Input
                                 variant="filled"
                                 type="text"
